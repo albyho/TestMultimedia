@@ -212,6 +212,7 @@
 		694E0D761C001C37007CC179 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TBM;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = alby;
 				TargetAttributes = {

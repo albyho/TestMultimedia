@@ -15,8 +15,9 @@
 		694E0DD71C002AE2007CC179 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 694E0DD51C002AE2007CC179 /* LaunchScreen.storyboard */; };
 		694E0DE21C002AE2007CC179 /* TestSystemSoundServicesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E0DE11C002AE2007CC179 /* TestSystemSoundServicesTests.m */; };
 		694E0DED1C002AE2007CC179 /* TestSystemSoundServicesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E0DEC1C002AE2007CC179 /* TestSystemSoundServicesUITests.m */; };
-		694E0DFD1C002B01007CC179 /* Sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 694E0DFA1C002B01007CC179 /* Sound.caf */; };
 		694E0DFE1C002B01007CC179 /* TBMSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E0DFC1C002B01007CC179 /* TBMSoundEffect.m */; };
+		69D40F741D4F4AA100752BB4 /* piano.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 69D40F721D4F4AA100752BB4 /* piano.m4a */; };
+		69D40F751D4F4AA100752BB4 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 69D40F731D4F4AA100752BB4 /* sound.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +54,10 @@
 		694E0DE81C002AE2007CC179 /* TestSystemSoundServicesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestSystemSoundServicesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		694E0DEC1C002AE2007CC179 /* TestSystemSoundServicesUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestSystemSoundServicesUITests.m; sourceTree = "<group>"; };
 		694E0DEE1C002AE2007CC179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		694E0DFA1C002B01007CC179 /* Sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sound.caf; sourceTree = "<group>"; };
 		694E0DFB1C002B01007CC179 /* TBMSoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMSoundEffect.h; sourceTree = "<group>"; };
 		694E0DFC1C002B01007CC179 /* TBMSoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMSoundEffect.m; sourceTree = "<group>"; };
+		69D40F721D4F4AA100752BB4 /* piano.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = piano.m4a; sourceTree = "<group>"; };
+		69D40F731D4F4AA100752BB4 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 		694E0DC61C002AE2007CC179 /* TestSystemSoundServices */ = {
 			isa = PBXGroup;
 			children = (
+				69D40F711D4F4AA100752BB4 /* Resources */,
 				694E0DC71C002AE2007CC179 /* Supporting Files */,
 				694E0DD31C002AE2007CC179 /* Assets.xcassets */,
 				694E0DD81C002AE2007CC179 /* Info.plist */,
@@ -115,7 +118,6 @@
 				694E0DCE1C002AE2007CC179 /* ViewController.m */,
 				694E0DD01C002AE2007CC179 /* Main.storyboard */,
 				694E0DD51C002AE2007CC179 /* LaunchScreen.storyboard */,
-				694E0DFA1C002B01007CC179 /* Sound.caf */,
 				694E0DFB1C002B01007CC179 /* TBMSoundEffect.h */,
 				694E0DFC1C002B01007CC179 /* TBMSoundEffect.m */,
 			);
@@ -146,6 +148,16 @@
 				694E0DEE1C002AE2007CC179 /* Info.plist */,
 			);
 			path = TestSystemSoundServicesUITests;
+			sourceTree = "<group>";
+		};
+		69D40F711D4F4AA100752BB4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				69D40F721D4F4AA100752BB4 /* piano.m4a */,
+				69D40F731D4F4AA100752BB4 /* sound.caf */,
+			);
+			name = Resources;
+			path = ../../Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +222,7 @@
 		694E0DBC1C002AE2007CC179 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TBM;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = alby;
 				TargetAttributes = {
@@ -251,9 +264,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69D40F741D4F4AA100752BB4 /* piano.m4a in Resources */,
 				694E0DD71C002AE2007CC179 /* LaunchScreen.storyboard in Resources */,
 				694E0DD41C002AE2007CC179 /* Assets.xcassets in Resources */,
-				694E0DFD1C002B01007CC179 /* Sound.caf in Resources */,
+				69D40F751D4F4AA100752BB4 /* sound.caf in Resources */,
 				694E0DD21C002AE2007CC179 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

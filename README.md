@@ -1,1 +1,1 @@
-Initialized
+Add TestMusicPlayerController project

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -19,7 +19,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3P-aB-fZZ">
                                 <rect key="frame" x="20" y="136" width="49" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Record">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -29,7 +28,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0PG-jF-l7L">
                                 <rect key="frame" x="20" y="182" width="30" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Play">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -39,7 +37,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4f-tT-Zmg">
                                 <rect key="frame" x="107" y="136" width="42" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Pause"/>
                                 <connections>
                                     <action selector="actionRecordPause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SQ8-6d-QTC"/>
@@ -47,7 +44,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9y-1J-ulu">
                                 <rect key="frame" x="196" y="136" width="55" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Resume"/>
                                 <connections>
                                     <action selector="actionRecordResume:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qG5-qO-igh"/>
@@ -55,7 +51,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o8r-wL-2Nn">
                                 <rect key="frame" x="289" y="136" width="32" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
                                     <action selector="actionRecordstop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gEz-BT-Vl2"/>
@@ -63,7 +58,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dj-uL-1OZ">
                                 <rect key="frame" x="107" y="182" width="42" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Pause"/>
                                 <connections>
                                     <action selector="actionPlayPause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BJk-J2-1ah"/>
@@ -71,7 +65,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOu-bP-AAN">
                                 <rect key="frame" x="196" y="182" width="55" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Resume"/>
                                 <connections>
                                     <action selector="actionPlayResume:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9H1-oa-u2x"/>
@@ -79,14 +72,12 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVh-MG-JDF">
                                 <rect key="frame" x="289" y="182" width="32" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
                                     <action selector="actionPlaystop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aBh-4G-sUH"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
