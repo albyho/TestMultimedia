@@ -14,7 +14,8 @@
 @import AVFoundation;
 @import MediaPlayer;
 
-NSString * const FileName = @"audio.m4a";
+NSString * const FileName = @"audio.wav";
+//NSString * const FileName = @"audio.m4a";
 
 @interface ViewController ()<AVAudioRecorderDelegate>
 

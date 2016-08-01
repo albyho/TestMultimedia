@@ -35,9 +35,9 @@
     NSURL *url = [NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:fileName]];
     NSLog(@"%s url: %@", __FUNCTION__, url);
     const Float32 sampleRate = 44100.;
-    const Float32 bitRate = 128000.;
-    //NSDictionary *recordSettings = [self recordSettingsForLinearPCMWithSampleRate:sampleRate];
-    NSDictionary *recordSettings = [self recordSettingsForMPEG4AACWithSampleRate:sampleRate bitRate:bitRate];
+    //const Float32 bitRate = 128000.;
+    NSDictionary *recordSettings = [self recordSettingsForLinearPCMWithSampleRate:sampleRate];
+    //NSDictionary *recordSettings = [self recordSettingsForMPEG4AACWithSampleRate:sampleRate bitRate:bitRate];
     self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:url settings:recordSettings error:&error];
     self.audioRecorder.delegate = self;
 
@@ -172,15 +172,15 @@
 
 #pragma mark - Audio Session Interruption Notification
 - (void)handleInterruption:(NSNotification *)notification {
-    UInt8 theInterruptionType = [[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] intValue];
+    UInt8 interruptionType = [[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] intValue];
     
-    NSLog(@"Session interrupted > --- %s ---\n", theInterruptionType == AVAudioSessionInterruptionTypeBegan ? "Begin Interruption" : "End Interruption");
+    NSLog(@"Session interrupted > --- %s ---\n", interruptionType == AVAudioSessionInterruptionTypeBegan ? "Begin Interruption" : "End Interruption");
 	   
-    if (theInterruptionType == AVAudioSessionInterruptionTypeBegan) {
+    if (interruptionType == AVAudioSessionInterruptionTypeBegan) {
         [self pause];
     }
     
-    if (theInterruptionType == AVAudioSessionInterruptionTypeEnded) {
+    if (interruptionType == AVAudioSessionInterruptionTypeEnded) {
         // make sure we are again the active session
         if (![self setupAudioSession])
             return;
@@ -204,7 +204,7 @@
             break;
         case AVAudioSessionRouteChangeReasonCategoryChange:
             NSLog(@"     CategoryChange");
-            NSLog(@" New Category: %@", [[AVAudioSession sharedInstance] category]);
+            NSLog(@"     New Category: %@", [[AVAudioSession sharedInstance] category]);
             break;
         case AVAudioSessionRouteChangeReasonOverride:
             NSLog(@"     Override");

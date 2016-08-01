@@ -149,15 +149,15 @@
 
 #pragma mark - Audio Session Interruption Notification
 - (void)handleInterruption:(NSNotification *)notification {
-    UInt8 theInterruptionType = [[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] intValue];
+    UInt8 interruptionType = [[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] intValue];
     
-    NSLog(@"Session interrupted > --- %s ---\n", theInterruptionType == AVAudioSessionInterruptionTypeBegan ? "Begin Interruption" : "End Interruption");
+    NSLog(@"Session interrupted > --- %s ---\n", interruptionType == AVAudioSessionInterruptionTypeBegan ? "Begin Interruption" : "End Interruption");
 	   
-    if (theInterruptionType == AVAudioSessionInterruptionTypeBegan) {
+    if (interruptionType == AVAudioSessionInterruptionTypeBegan) {
         [self pause];
     }
     
-    if (theInterruptionType == AVAudioSessionInterruptionTypeEnded) {
+    if (interruptionType == AVAudioSessionInterruptionTypeEnded) {
         // make sure we are again the active session
         if (![self setupAudioSession])
            return;
@@ -181,7 +181,7 @@
             break;
         case AVAudioSessionRouteChangeReasonCategoryChange:
             NSLog(@"     CategoryChange");
-            NSLog(@" New Category: %@", [[AVAudioSession sharedInstance] category]);
+            NSLog(@"     New Category: %@", [[AVAudioSession sharedInstance] category]);
             break;
         case AVAudioSessionRouteChangeReasonOverride:
             NSLog(@"     Override");
