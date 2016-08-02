@@ -23,10 +23,10 @@
 @property (weak, nonatomic) IBOutlet UISlider *volumeSlider;  // 不使用，仅为了界面布局，实际项目不要这样做
 @property (nonatomic)       MPVolumeView *volumeView;         // 控制音量的view
 @property (nonatomic)       UISlider *volumeViewSlider;       // 控制音量。暂未使用，如果要自定义音量控制UI，可通过操作其value属性进行音量设置
+@property (nonatomic)       float volume;                     // 当前音量。暂未使用，目的同volumeViewSlider
 
-@property (nonatomic)   TBMMusicPlayer *musicPlayer;
-@property (nonatomic)   float volume;
-@property (nonatomic)   MPMediaItemCollection *mediaItemCollection;
+@property (nonatomic)       TBMMusicPlayer *musicPlayer;
+@property (nonatomic)       MPMediaItemCollection *mediaItemCollection;
 @end
 
 @implementation ViewController
@@ -186,6 +186,14 @@
         }
     }
     return _volumeView;
+}
+
+- (void)setVolume:(float)volume {
+    _volumeViewSlider.value = volume;
+}
+
+- (float)volume {
+    return _volumeSlider.value;
 }
 
 #pragma mark - Utils
