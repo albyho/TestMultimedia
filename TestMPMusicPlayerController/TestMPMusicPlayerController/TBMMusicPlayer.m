@@ -32,29 +32,17 @@
 }
 
 - (void)playWithMediaItem:(MPMediaItem *)mediaItem {
-    [self stop];
+    [self.musicPlayerController stop];
     
     [self.musicPlayerController setNowPlayingItem:mediaItem];
     [self.musicPlayerController play];
 }
 
 - (void)playWithItemCollection:(MPMediaItemCollection *)itemCollection {
-    [self stop];
+    [self.musicPlayerController stop];
     
     [self.musicPlayerController setQueueWithItemCollection:itemCollection];
     [self.musicPlayerController play];
-}
-
-- (void)pause {
-    [self.musicPlayerController pause];
-}
-
-- (void)resume {
-    [self.musicPlayerController play];
-}
-
-- (void)stop {
-    [self.musicPlayerController stop];
 }
 
 #pragma mark - Notifications

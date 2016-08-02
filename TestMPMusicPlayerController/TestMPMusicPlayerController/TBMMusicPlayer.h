@@ -31,9 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)playWithMediaItem:(MPMediaItem *)mediaItem;
 - (void)playWithItemCollection:(MPMediaItemCollection *)itemCollection;
-- (void)pause;
-- (void)resume;
-- (void)stop;
+
 
 @end
 

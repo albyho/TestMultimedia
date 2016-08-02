@@ -78,6 +78,8 @@ NSString * const FileName = @"audio.wav";
 - (IBAction)actionPlayResume:(id)sender {
     [self.audioPlayer resume];
 }
+- (IBAction)actionPrevious:(id)sender {
+}
 
 - (IBAction)actionPlaystop:(id)sender {
     [self.audioPlayer stop];

@@ -42,10 +42,16 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzk-mq-uYK">
                                 <rect key="frame" x="29" y="129" width="59" height="30"/>
                                 <state key="normal" title="Previous"/>
+                                <connections>
+                                    <action selector="actionPrevious:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UMG-8o-GNP"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYv-yv-mjO">
                                 <rect key="frame" x="342" y="132" width="42" height="30"/>
                                 <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="actionNext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mKi-bZ-JMm"/>
+                                </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PqX-I9-3Vt">
                                 <rect key="frame" x="97" y="169" width="239" height="31"/>

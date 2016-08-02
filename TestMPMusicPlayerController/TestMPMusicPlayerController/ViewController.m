@@ -67,15 +67,25 @@
 
 - (IBAction)actionPause:(UIButton *)sender {
     if(!sender.isSelected) {
-        [self.musicPlayer pause];
+        [self.musicPlayer.musicPlayerController pause];
     } else {
-        [self.musicPlayer resume];
+        [self.musicPlayer.musicPlayerController play];
     }
 }
 
 - (IBAction)actionStop:(UIButton *)sender {
-    [self.musicPlayer stop];
+    [self.musicPlayer.musicPlayerController stop];
     self.pauseButton.selected = NO;
+}
+
+- (IBAction)actionPrevious:(UIButton *)sender {
+    // TODO: 判断是否有上一首，最好的做法是在UI上控制按钮的可用性或可见性。
+    [self.musicPlayer.musicPlayerController skipToPreviousItem];
+}
+
+- (IBAction)actionNext:(UIButton *)sender {
+    // TODO: 判断是否有下一首，最好的做法是在UI上控制按钮的可用性或可见性。
+    [self.musicPlayer.musicPlayerController skipToNextItem];
 }
 
 #pragma mark - MPMediaPickerControllerDelegate
