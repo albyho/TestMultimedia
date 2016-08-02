@@ -14,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TBMMusicPlayer : NSObject
 
-@property (nonatomic, nullable)     MPMusicPlayerController *musicPlayerController;
+@property (nonatomic, readonly)     MPMusicPlayerController *musicPlayerController;
+
+- (instancetype)initWithMusicPlayerController:(MPMusicPlayerController *)musicPlayerController;
 
 - (void)playWithMediaItem:(MPMediaItem *)mediaItem;
 - (void)playWithItemCollection:(MPMediaItemCollection *)itemCollection;

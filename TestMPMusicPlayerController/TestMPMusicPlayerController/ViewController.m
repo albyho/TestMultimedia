@@ -34,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-    self.musicPlayer = [[TBMMusicPlayer alloc] init];
+    self.musicPlayer = [[TBMMusicPlayer alloc] initWithMusicPlayerController:MPMusicPlayerController.systemMusicPlayer];
 }
 
 #pragma mark - Actions

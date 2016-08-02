@@ -11,6 +11,8 @@
 
 @interface TBMMusicPlayer ()
 
+@property (nonatomic, readwrite)     MPMusicPlayerController *musicPlayerController;
+
 @end
 
 @implementation TBMMusicPlayer
@@ -19,15 +21,17 @@
     [self removeObservers];
 }
 
-- (void)playWithMediaItem:(MPMediaItem *)mediaItem {
-    if(!self.musicPlayerController) {
-        //self.musicPlayerController = MPMusicPlayerController.applicationMusicPlayer;
-        //self.musicPlayerController = [[MPMusicPlayerController alloc] init];
-        self.musicPlayerController = MPMusicPlayerController.systemMusicPlayer;
-    } else {
-        [self stop];
+- (instancetype)initWithMusicPlayerController:(MPMusicPlayerController *)musicPlayerController {
+    self = [super init];
+    if(self) {
+        _musicPlayerController = musicPlayerController;
     }
+    return self;
+}
 
+- (void)playWithMediaItem:(MPMediaItem *)mediaItem {
+    [self stop];
+    
     [self.musicPlayerController beginGeneratingPlaybackNotifications];
     [self addObservers];
     [self.musicPlayerController endGeneratingPlaybackNotifications];
@@ -37,13 +41,7 @@
 }
 
 - (void)playWithItemCollection:(MPMediaItemCollection *)itemCollection {
-    if(!self.musicPlayerController) {
-        //self.musicPlayerController = MPMusicPlayerController.applicationMusicPlayer;
-        //self.musicPlayerController = [[MPMusicPlayerController alloc] init];
-        self.musicPlayerController = MPMusicPlayerController.systemMusicPlayer;
-    } else {
-        [self stop];
-    }
+    [self stop];
     
     [self.musicPlayerController beginGeneratingPlaybackNotifications];
     [self addObservers];
@@ -55,22 +53,16 @@
 }
 
 - (void)pause {
-    if(self.musicPlayerController) {
-        [self.musicPlayerController pause];
-    }
+    [self.musicPlayerController pause];
 }
 
 - (void)resume {
-    if(self.musicPlayerController) {
-        [self.musicPlayerController play];
-    }
+    [self.musicPlayerController play];
 }
 
 - (void)stop {
-    if(self.musicPlayerController) {
-        [self removeObservers];
-        [self.musicPlayerController stop];
-    }
+    [self removeObservers];
+    [self.musicPlayerController stop];
 }
 
 #pragma mark - Notifications
@@ -82,7 +74,6 @@
     [nc addObserver:self selector:@selector(nowPlayingItemDidChange:) name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:self.musicPlayerController];
     [nc addObserver:self selector:@selector(volumeDidChange:) name:MPMusicPlayerControllerVolumeDidChangeNotification object:self.musicPlayerController];
     ;
-    
 }
 
 - (void)removeObservers {
