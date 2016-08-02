@@ -10,7 +10,7 @@
 #import "TBMMusicPlayer.h"
 @import MediaPlayer;
 
-@interface ViewController ()<MPMediaPickerControllerDelegate>
+@interface ViewController ()<MPMediaPickerControllerDelegate, TBMMusicPlayerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
@@ -35,10 +35,15 @@
     // Do any additional setup after loading the view, typically from a nib.
 
     self.musicPlayer = [[TBMMusicPlayer alloc] initWithMusicPlayerController:MPMusicPlayerController.systemMusicPlayer];
+    //self.musicPlayer = [[TBMMusicPlayer alloc] initWithMusicPlayerController:MPMusicPlayerController.applicationMusicPlayer];
+    self.musicPlayer.delegate = self;
+    
+    self.pauseButton.enabled = NO;
+    self.stopButton.enabled = NO;
 }
 
 #pragma mark - Actions
-- (IBAction)actionPlay:(id)sender {
+- (IBAction)actionPlay:(UIButton *)sender {
     MPMediaPickerController * mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
     if(mediaPicker != nil) {
         NSLog(@"Successfully instantiated a media picker");
@@ -51,12 +56,17 @@
     }
 }
 
-- (IBAction)actionPause:(id)sender {
-    [self.musicPlayer pause];
+- (IBAction)actionPause:(UIButton *)sender {
+    if(!sender.isSelected) {
+        [self.musicPlayer pause];
+    } else {
+        [self.musicPlayer resume];
+    }
 }
 
-- (IBAction)actionStop:(id)sender {
+- (IBAction)actionStop:(UIButton *)sender {
     [self.musicPlayer stop];
+    self.pauseButton.selected = NO;
 }
 
 #pragma mark - MPMediaPickerControllerDelegate
@@ -117,6 +127,40 @@
 -(void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker {
     NSLog(@"Media Picker was cancelled");
     [mediaPicker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - TBMMusicPlayerDelegate
+- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer playbackStateDidChange:(MPMusicPlaybackState)state {
+    switch (state) {
+        case MPMusicPlaybackStateStopped:
+        {
+            self.pauseButton.enabled = NO;
+            self.stopButton.enabled = NO;
+        }
+            break;
+        case MPMusicPlaybackStatePlaying:
+        {
+            self.pauseButton.enabled = YES;
+            self.pauseButton.selected = NO;
+            self.stopButton.enabled = YES;
+        }
+            break;
+        case MPMusicPlaybackStatePaused:
+        {
+            self.pauseButton.selected = YES;
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer nowPlayingItemDidChange:(MPMediaEntityPersistentID)persistentID {
+
+}
+
+- (void)tbmMusicPlayerVolumeDidChange:(TBMMusicPlayer *)tbmMusicPlayer {
+
 }
 
 #pragma mark - Utils

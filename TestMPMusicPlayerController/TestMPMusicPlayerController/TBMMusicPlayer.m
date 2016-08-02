@@ -25,16 +25,14 @@
     self = [super init];
     if(self) {
         _musicPlayerController = musicPlayerController;
+        [_musicPlayerController beginGeneratingPlaybackNotifications];
+        [self addObservers];
     }
     return self;
 }
 
 - (void)playWithMediaItem:(MPMediaItem *)mediaItem {
     [self stop];
-    
-    [self.musicPlayerController beginGeneratingPlaybackNotifications];
-    [self addObservers];
-    [self.musicPlayerController endGeneratingPlaybackNotifications];
     
     [self.musicPlayerController setNowPlayingItem:mediaItem];
     [self.musicPlayerController play];
@@ -43,13 +41,8 @@
 - (void)playWithItemCollection:(MPMediaItemCollection *)itemCollection {
     [self stop];
     
-    [self.musicPlayerController beginGeneratingPlaybackNotifications];
-    [self addObservers];
-    [self.musicPlayerController endGeneratingPlaybackNotifications];
-    
     [self.musicPlayerController setQueueWithItemCollection:itemCollection];
     [self.musicPlayerController play];
-
 }
 
 - (void)pause {
@@ -61,42 +54,44 @@
 }
 
 - (void)stop {
-    [self removeObservers];
     [self.musicPlayerController stop];
 }
 
 #pragma mark - Notifications
 - (void)addObservers {
-    if(!self.musicPlayerController) return;
-    
+    // init方法中使用，不使用属性
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(musicPlayerStatedDidChange:) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:self.musicPlayerController];
-    [nc addObserver:self selector:@selector(nowPlayingItemDidChange:) name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:self.musicPlayerController];
-    [nc addObserver:self selector:@selector(volumeDidChange:) name:MPMusicPlayerControllerVolumeDidChangeNotification object:self.musicPlayerController];
+    [nc addObserver:self selector:@selector(musicPlaybackStateDidChange:) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:_musicPlayerController];
+    [nc addObserver:self selector:@selector(nowPlayingItemDidChange:) name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:_musicPlayerController];
+    [nc addObserver:self selector:@selector(volumeDidChange:) name:MPMusicPlayerControllerVolumeDidChangeNotification object:_musicPlayerController];
     ;
 }
 
 - (void)removeObservers {
-    if(!self.musicPlayerController) return;
-    
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver:self name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:self.musicPlayerController];
     [nc removeObserver:self name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:self.musicPlayerController];
     [nc removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:self.musicPlayerController];
 }
 
--(void)musicPlayerStatedDidChange:(NSNotification *)notification {
+- (void)musicPlaybackStateDidChange:(NSNotification *)notification {
     NSNumber *stateAsObject = [notification.userInfo objectForKey:@"MPMusicPlayerControllerPlaybackStateKey"];
     NSInteger state = [stateAsObject integerValue];
     NSLog(@"Player State Changed: %@", [self stringWithMPMusicPlaybackState:state]);
+    if ([self.delegate respondsToSelector:@selector(tbmMusicPlayer:playbackStateDidChange:)]) {
+        [self.delegate tbmMusicPlayer:self playbackStateDidChange:state];
+    }
 }
 
--(void)nowPlayingItemDidChange:(NSNotification *)notification {
-    NSString * persistentID = [notification.userInfo objectForKey:@"MPMusicPlayerControllerNowPlayingItemPersistentIDKey"];
-    NSLog(@"Playing Item did Change: %@", persistentID);
+- (void)nowPlayingItemDidChange:(NSNotification *)notification {
+    NSNumber *persistentIDAsObject = [notification.userInfo objectForKey:@"MPMusicPlayerControllerNowPlayingItemPersistentIDKey"];
+    NSLog(@"Playing Item did Change: %@", persistentIDAsObject);
+    if ([self.delegate respondsToSelector:@selector(tbmMusicPlayer:nowPlayingItemDidChange:)]) {
+        [self.delegate tbmMusicPlayer:self nowPlayingItemDidChange:(MPMediaEntityPersistentID)[persistentIDAsObject unsignedLongLongValue]];
+    }
 }
 
--(void)volumeDidChange:(NSNotification *)notification {
+- (void)volumeDidChange:(NSNotification *)notification {
     NSLog(@"Volume Did Change");
 }
 

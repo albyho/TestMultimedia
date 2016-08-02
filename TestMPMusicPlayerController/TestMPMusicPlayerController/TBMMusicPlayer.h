@@ -10,11 +10,22 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 
+@class TBMMusicPlayer;
+
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol TBMMusicPlayerDelegate <NSObject>
+
+- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer playbackStateDidChange:(MPMusicPlaybackState)state;
+- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer nowPlayingItemDidChange:(MPMediaEntityPersistentID)persistentID;
+- (void)tbmMusicPlayerVolumeDidChange:(TBMMusicPlayer *)tbmMusicPlayer;
+
+@end
 
 @interface TBMMusicPlayer : NSObject
 
-@property (nonatomic, readonly)     MPMusicPlayerController *musicPlayerController;
+@property (nonatomic, weak, nullable)       id<TBMMusicPlayerDelegate> delegate;
+@property (nonatomic, readonly)             MPMusicPlayerController *musicPlayerController;
 
 - (instancetype)initWithMusicPlayerController:(MPMusicPlayerController *)musicPlayerController;
 
