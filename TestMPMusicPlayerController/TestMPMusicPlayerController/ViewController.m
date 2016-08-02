@@ -17,11 +17,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *previousButton;
+@property (weak, nonatomic) IBOutlet UISlider *progressSlider;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
+@property (weak, nonatomic) IBOutlet UISlider *volumeSlider;  // 不使用，仅为了界面布局，实际项目不要这样做
+@property (nonatomic)       MPVolumeView *volumeView;         // 控制音量的view
+@property (nonatomic)       UISlider *volumeViewSlider;       // 控制音量。暂未使用，如果要自定义音量控制UI，可通过操作其value属性进行音量设置
 
 @property (nonatomic)   TBMMusicPlayer *musicPlayer;
-
+@property (nonatomic)   float volume;
+@property (nonatomic)   MPMediaItemCollection *mediaItemCollection;
 @end
 
 @implementation ViewController
@@ -33,6 +38,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+
+    self.volumeView.frame = self.volumeSlider.frame;
+    [self.view addSubview:self.volumeView];
+    self.volumeSlider.hidden = YES;
 
     self.musicPlayer = [[TBMMusicPlayer alloc] initWithMusicPlayerController:MPMusicPlayerController.systemMusicPlayer];
     //self.musicPlayer = [[TBMMusicPlayer alloc] initWithMusicPlayerController:MPMusicPlayerController.applicationMusicPlayer];
@@ -73,6 +82,7 @@
 -(void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
     NSLog(@"Media Picker returned");
     NSLog(@"Count: %lu MediaTypes: %@", (unsigned long)mediaItemCollection.count, [self stringWithMediaType:mediaItemCollection.mediaTypes]);
+    self.mediaItemCollection = mediaItemCollection;
     
 #ifdef LOG
     NSMutableString *log = [NSMutableString string];
@@ -155,12 +165,27 @@
     }
 }
 
-- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer nowPlayingItemDidChange:(MPMediaEntityPersistentID)persistentID {
+- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer nowPlayingItemDidChange:(MPMediaEntityPersistentID)persistentID indexOfNowPlayingItem:(NSUInteger)indexOfNowPlayingItem {
 
 }
 
 - (void)tbmMusicPlayerVolumeDidChange:(TBMMusicPlayer *)tbmMusicPlayer {
 
+}
+
+#pragma mark - Properties
+- (MPVolumeView *)volumeView {
+    if (_volumeView == nil) {
+        _volumeView  = [[MPVolumeView alloc] init];
+        [_volumeView sizeToFit];
+        for (UIView *view in [_volumeView subviews]){
+            if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+                _volumeViewSlider = (UISlider *)view;
+                break;
+            }
+        }
+    }
+    return _volumeView;
 }
 
 #pragma mark - Utils

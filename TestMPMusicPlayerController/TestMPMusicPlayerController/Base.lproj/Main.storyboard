@@ -47,8 +47,8 @@
                                 <rect key="frame" x="342" y="132" width="42" height="30"/>
                                 <state key="normal" title="Next"/>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PqX-I9-3Vt">
-                                <rect key="frame" x="97" y="163" width="239" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PqX-I9-3Vt">
+                                <rect key="frame" x="97" y="169" width="239" height="31"/>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Volume:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPj-HF-VAN">
                                 <rect key="frame" x="29" y="167" width="62" height="21"/>
@@ -56,7 +56,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JFk-VR-Qje">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JFk-VR-Qje">
                                 <rect key="frame" x="97" y="132" width="239" height="31"/>
                             </slider>
                         </subviews>
@@ -67,7 +67,9 @@
                         <outlet property="pauseButton" destination="KrF-wQ-ivu" id="PjJ-Z2-3Y1"/>
                         <outlet property="playButton" destination="tsI-YG-647" id="UW8-96-dvb"/>
                         <outlet property="previousButton" destination="bzk-mq-uYK" id="BFm-Gp-O26"/>
+                        <outlet property="progressSlider" destination="JFk-VR-Qje" id="irb-mj-ccl"/>
                         <outlet property="stopButton" destination="hBP-li-Nb5" id="xy0-hd-aH7"/>
+                        <outlet property="volumeSlider" destination="PqX-I9-3Vt" id="q1Y-af-Qk9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

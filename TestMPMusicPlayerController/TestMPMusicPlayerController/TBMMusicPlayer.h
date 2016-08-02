@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TBMMusicPlayerDelegate <NSObject>
 
 - (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer playbackStateDidChange:(MPMusicPlaybackState)state;
-- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer nowPlayingItemDidChange:(MPMediaEntityPersistentID)persistentID;
+- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer nowPlayingItemDidChange:(MPMediaEntityPersistentID)persistentID indexOfNowPlayingItem:(NSUInteger)indexOfNowPlayingItem;
 - (void)tbmMusicPlayerVolumeDidChange:(TBMMusicPlayer *)tbmMusicPlayer;
 
 @end

@@ -85,9 +85,12 @@
 
 - (void)nowPlayingItemDidChange:(NSNotification *)notification {
     NSNumber *persistentIDAsObject = [notification.userInfo objectForKey:@"MPMusicPlayerControllerNowPlayingItemPersistentIDKey"];
-    NSLog(@"Playing Item did Change: %@", persistentIDAsObject);
-    if ([self.delegate respondsToSelector:@selector(tbmMusicPlayer:nowPlayingItemDidChange:)]) {
-        [self.delegate tbmMusicPlayer:self nowPlayingItemDidChange:(MPMediaEntityPersistentID)[persistentIDAsObject unsignedLongLongValue]];
+    NSLog(@"Playing Item did Change: %@ IndexOfNowPlayingItem: %lu", persistentIDAsObject, (unsigned long)self.musicPlayerController.indexOfNowPlayingItem);
+    if ([self.delegate respondsToSelector:@selector(tbmMusicPlayer:nowPlayingItemDidChange:indexOfNowPlayingItem:)]) {
+        [self.delegate tbmMusicPlayer:self
+              nowPlayingItemDidChange:(MPMediaEntityPersistentID)[persistentIDAsObject unsignedLongLongValue]
+                indexOfNowPlayingItem:self.musicPlayerController.indexOfNowPlayingItem
+         ];
     }
 }
 
