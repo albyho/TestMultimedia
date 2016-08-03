@@ -45,10 +45,10 @@
     [self.view addSubview:self.volumeView];
     self.volumeSlider.hidden = YES;
 
-    _musicPlayerController = MPMusicPlayerController.systemMusicPlayer;
-    _musicPlayerController.repeatMode = MPMusicRepeatModeDefault;
-    _musicPlayerController.shuffleMode = MPMusicRepeatModeDefault;
-    [_musicPlayerController beginGeneratingPlaybackNotifications];
+    self.musicPlayerController = MPMusicPlayerController.systemMusicPlayer;
+    self.musicPlayerController.repeatMode = MPMusicRepeatModeDefault;
+    self.musicPlayerController.shuffleMode = MPMusicRepeatModeDefault;
+    [self.musicPlayerController beginGeneratingPlaybackNotifications];
     [self addObservers];
     
     self.pauseButton.enabled = NO;
@@ -158,7 +158,7 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.musicPlayerController setNowPlayingItem:[self.mediaItemCollection.items objectAtIndex:indexPath.row]];
-    [self.musicPlayerController play];
+    [self.musicPlayerController play]; // 再次调用play，确保播放pause或stop后能自动播放
 }
 
 #pragma mark - UITableViewDataSource
