@@ -10,7 +10,7 @@
 #import "TBMMusicPlayer.h"
 @import MediaPlayer;
 
-@interface ViewController ()<MPMediaPickerControllerDelegate, TBMMusicPlayerDelegate>
+@interface ViewController ()<MPMediaPickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, TBMMusicPlayerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
@@ -25,8 +25,11 @@
 @property (nonatomic)       UISlider *volumeViewSlider;       // 控制音量。暂未使用，如果要自定义音量控制UI，可通过操作其value属性进行音量设置
 @property (nonatomic)       float volume;                     // 当前音量。暂未使用，目的同volumeViewSlider
 
+@property (weak, nonatomic) IBOutlet UITableView *playbackTableView;
+
 @property (nonatomic)       TBMMusicPlayer *musicPlayer;
 @property (nonatomic)       MPMediaItemCollection *mediaItemCollection;
+
 @end
 
 @implementation ViewController
@@ -93,6 +96,7 @@
     NSLog(@"Media Picker returned");
     NSLog(@"Count: %lu MediaTypes: %@", (unsigned long)mediaItemCollection.count, [self stringWithMediaType:mediaItemCollection.mediaTypes]);
     self.mediaItemCollection = mediaItemCollection;
+    [self.playbackTableView reloadData];
     
 #ifdef LOG
     NSMutableString *log = [NSMutableString string];
@@ -176,11 +180,35 @@
 }
 
 - (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer nowPlayingItemDidChange:(MPMediaEntityPersistentID)persistentID indexOfNowPlayingItem:(NSUInteger)indexOfNowPlayingItem {
-
+    if(indexOfNowPlayingItem >= self.mediaItemCollection.count) return;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:indexOfNowPlayingItem inSection:0];
+    [self.playbackTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (void)tbmMusicPlayerVolumeDidChange:(TBMMusicPlayer *)tbmMusicPlayer {
 
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.musicPlayer.musicPlayerController setNowPlayingItem:[self.mediaItemCollection.items objectAtIndex:indexPath.row]];
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.mediaItemCollection.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellIdentifier = @"Cell";
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.textLabel.text = [self.mediaItemCollection.items objectAtIndex:indexPath.row].title;
+    
+    return cell;
 }
 
 #pragma mark - Properties

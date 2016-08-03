@@ -25,6 +25,8 @@
     self = [super init];
     if(self) {
         _musicPlayerController = musicPlayerController;
+        _musicPlayerController.repeatMode = MPMusicRepeatModeDefault;
+        _musicPlayerController.shuffleMode = MPMusicRepeatModeDefault;
         [_musicPlayerController beginGeneratingPlaybackNotifications];
         [self addObservers];
     }
@@ -35,7 +37,7 @@
     [self.musicPlayerController stop];
     
     [self.musicPlayerController setNowPlayingItem:mediaItem];
-    [self.musicPlayerController play];
+    [self.musicPlayerController play]; //  测试：是否不需要调用play方法
 }
 
 - (void)playWithItemCollection:(MPMediaItemCollection *)itemCollection {
