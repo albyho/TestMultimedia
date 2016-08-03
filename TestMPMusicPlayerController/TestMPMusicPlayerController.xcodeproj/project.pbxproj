@@ -16,7 +16,6 @@
 		690AA9F31C054FE9009668CA /* TestMPMusicPlayerControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 690AA9F21C054FE9009668CA /* TestMPMusicPlayerControllerTests.m */; };
 		690AA9FE1C054FE9009668CA /* TestMPMusicPlayerControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 690AA9FD1C054FE9009668CA /* TestMPMusicPlayerControllerUITests.m */; };
 		69CFF3091D4EE39600A54875 /* piano.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 69CFF3081D4EE39600A54875 /* piano.m4a */; };
-		69CFF30C1D4EEDBA00A54875 /* TBMMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 69CFF30B1D4EEDBA00A54875 /* TBMMusicPlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +53,6 @@
 		690AA9FD1C054FE9009668CA /* TestMPMusicPlayerControllerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestMPMusicPlayerControllerUITests.m; sourceTree = "<group>"; };
 		690AA9FF1C054FE9009668CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69CFF3081D4EE39600A54875 /* piano.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = piano.m4a; sourceTree = "<group>"; };
-		69CFF30A1D4EEDBA00A54875 /* TBMMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMMusicPlayer.h; sourceTree = "<group>"; };
-		69CFF30B1D4EEDBA00A54875 /* TBMMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMMusicPlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +113,6 @@
 				690AA9DF1C054FE9009668CA /* ViewController.m */,
 				690AA9E11C054FE9009668CA /* Main.storyboard */,
 				690AA9E61C054FE9009668CA /* LaunchScreen.storyboard */,
-				69CFF30A1D4EEDBA00A54875 /* TBMMusicPlayer.h */,
-				69CFF30B1D4EEDBA00A54875 /* TBMMusicPlayer.m */,
 			);
 			path = TestMPMusicPlayerController;
 			sourceTree = "<group>";
@@ -289,7 +284,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69CFF30C1D4EEDBA00A54875 /* TBMMusicPlayer.m in Sources */,
 				690AA9E01C054FE9009668CA /* ViewController.m in Sources */,
 				690AA9DD1C054FE9009668CA /* AppDelegate.m in Sources */,
 				690AA9DA1C054FE9009668CA /* main.m in Sources */,

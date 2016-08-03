@@ -7,10 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "TBMMusicPlayer.h"
 @import MediaPlayer;
 
-@interface ViewController ()<MPMediaPickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, TBMMusicPlayerDelegate>
+@interface ViewController ()<MPMediaPickerControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
@@ -27,7 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *playbackTableView;
 
-@property (nonatomic)       TBMMusicPlayer *musicPlayer;
+@property (nonatomic)       MPMusicPlayerController *musicPlayerController;
 @property (nonatomic)       MPMediaItemCollection *mediaItemCollection;
 
 @end
@@ -46,9 +45,11 @@
     [self.view addSubview:self.volumeView];
     self.volumeSlider.hidden = YES;
 
-    self.musicPlayer = [[TBMMusicPlayer alloc] initWithMusicPlayerController:MPMusicPlayerController.systemMusicPlayer];
-    //self.musicPlayer = [[TBMMusicPlayer alloc] initWithMusicPlayerController:MPMusicPlayerController.applicationMusicPlayer];
-    self.musicPlayer.delegate = self;
+    _musicPlayerController = MPMusicPlayerController.systemMusicPlayer;
+    _musicPlayerController.repeatMode = MPMusicRepeatModeDefault;
+    _musicPlayerController.shuffleMode = MPMusicRepeatModeDefault;
+    [_musicPlayerController beginGeneratingPlaybackNotifications];
+    [self addObservers];
     
     self.pauseButton.enabled = NO;
     self.stopButton.enabled = NO;
@@ -70,25 +71,25 @@
 
 - (IBAction)actionPause:(UIButton *)sender {
     if(!sender.isSelected) {
-        [self.musicPlayer.musicPlayerController pause];
+        [self.musicPlayerController pause];
     } else {
-        [self.musicPlayer.musicPlayerController play];
+        [self.musicPlayerController play];
     }
 }
 
 - (IBAction)actionStop:(UIButton *)sender {
-    [self.musicPlayer.musicPlayerController stop];
+    [self.musicPlayerController stop];
     self.pauseButton.selected = NO;
 }
 
 - (IBAction)actionPrevious:(UIButton *)sender {
     // TODO: 判断是否有上一首，最好的做法是在UI上控制按钮的可用性或可见性。
-    [self.musicPlayer.musicPlayerController skipToPreviousItem];
+    [self.musicPlayerController skipToPreviousItem];
 }
 
 - (IBAction)actionNext:(UIButton *)sender {
     // TODO: 判断是否有下一首，最好的做法是在UI上控制按钮的可用性或可见性。
-    [self.musicPlayer.musicPlayerController skipToNextItem];
+    [self.musicPlayerController skipToNextItem];
 }
 
 #pragma mark - MPMediaPickerControllerDelegate
@@ -144,7 +145,8 @@
     NSLog(@"%@", log);
 #endif
     
-    [self.musicPlayer playWithItemCollection:mediaItemCollection];
+    [self.musicPlayerController setQueueWithItemCollection:mediaItemCollection];
+    [self.musicPlayerController play];
     [mediaPicker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -153,8 +155,50 @@
     [mediaPicker dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - TBMMusicPlayerDelegate
-- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer playbackStateDidChange:(MPMusicPlaybackState)state {
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.musicPlayerController setNowPlayingItem:[self.mediaItemCollection.items objectAtIndex:indexPath.row]];
+    [self.musicPlayerController play];
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.mediaItemCollection.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellIdentifier = @"Cell";
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.textLabel.text = [self.mediaItemCollection.items objectAtIndex:indexPath.row].title;
+    
+    return cell;
+}
+
+#pragma mark - Notifications
+- (void)addObservers {
+    // init方法中使用，不使用属性
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(musicPlaybackStateDidChange:) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:_musicPlayerController];
+    [nc addObserver:self selector:@selector(nowPlayingItemDidChange:) name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:_musicPlayerController];
+    [nc addObserver:self selector:@selector(volumeDidChange:) name:MPMusicPlayerControllerVolumeDidChangeNotification object:_musicPlayerController];
+    ;
+}
+
+- (void)removeObservers {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:self.musicPlayerController];
+    [nc removeObserver:self name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:self.musicPlayerController];
+    [nc removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:self.musicPlayerController];
+}
+
+- (void)musicPlaybackStateDidChange:(NSNotification *)notification {
+    NSNumber *stateAsObject = [notification.userInfo objectForKey:@"MPMusicPlayerControllerPlaybackStateKey"];
+    NSInteger state = [stateAsObject integerValue];
+    NSLog(@"Player State Changed: %@", [self stringWithMPMusicPlaybackState:state]);
     switch (state) {
         case MPMusicPlaybackStateStopped:
         {
@@ -178,46 +222,27 @@
         default:
             break;
     }
+
 }
 
-- (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer nowPlayingItemDidChange:(MPMediaEntityPersistentID)persistentID indexOfNowPlayingItem:(NSUInteger)indexOfNowPlayingItem {
+- (void)nowPlayingItemDidChange:(NSNotification *)notification {
+    NSNumber *persistentIDAsObject = [notification.userInfo objectForKey:@"MPMusicPlayerControllerNowPlayingItemPersistentIDKey"];
+    NSLog(@"Playing Item did Change: %@ IndexOfNowPlayingItem: %lu", persistentIDAsObject, (unsigned long)self.musicPlayerController.indexOfNowPlayingItem);
     
     // Previous如果没有上一首 或 Next如果没有下一首会停止播放，取消选择。
     [self.playbackTableView deselectRowAtIndexPath:self.playbackTableView.indexPathForSelectedRow animated:YES];
-
-    if(indexOfNowPlayingItem >= self.mediaItemCollection.count) {
+    
+    if(self.musicPlayerController.indexOfNowPlayingItem >= self.mediaItemCollection.count) {
         return;
     }
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:indexOfNowPlayingItem inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.musicPlayerController.indexOfNowPlayingItem inSection:0];
     [self.playbackTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-}
-
-- (void)tbmMusicPlayerVolumeDidChange:(TBMMusicPlayer *)tbmMusicPlayer {
 
 }
 
-#pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.musicPlayer.musicPlayerController setNowPlayingItem:[self.mediaItemCollection.items objectAtIndex:indexPath.row]];
-    [self.musicPlayer.musicPlayerController play];
-}
-
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.mediaItemCollection.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"Cell";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    cell.textLabel.text = [self.mediaItemCollection.items objectAtIndex:indexPath.row].title;
-    
-    return cell;
+- (void)volumeDidChange:(NSNotification *)notification {
+    NSLog(@"Volume Did Change");
 }
 
 #pragma mark - Properties
@@ -272,6 +297,23 @@
             return @"MPMediaTypeAnyVideo";
         case MPMediaTypeAny:
             return @"MPMediaTypeAny";
+    }
+}
+
+- (NSString *)stringWithMPMusicPlaybackState:(MPMusicPlaybackState)state {
+    switch (state) {
+        case MPMusicPlaybackStateStopped:
+            return @"MPMusicPlaybackStateStopped";
+        case MPMusicPlaybackStatePlaying:
+            return @"MPMusicPlaybackStatePlaying";
+        case MPMusicPlaybackStatePaused:
+            return @"MPMusicPlaybackStatePaused";
+        case MPMusicPlaybackStateInterrupted:
+            return @"MPMusicPlaybackStateInterrupted";
+        case MPMusicPlaybackStateSeekingForward:
+            return @"MPMusicPlaybackStateSeekingForward";
+        case MPMusicPlaybackStateSeekingBackward:
+            return @"MPMusicPlaybackStateSeekingBackward";
     }
 }
 
