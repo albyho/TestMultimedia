@@ -29,7 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithMusicPlayerController:(MPMusicPlayerController *)musicPlayerController;
 
-- (void)playWithMediaItem:(MPMediaItem *)mediaItem;
 - (void)playWithItemCollection:(MPMediaItemCollection *)itemCollection;
 
 

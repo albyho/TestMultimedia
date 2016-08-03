@@ -158,6 +158,7 @@
     switch (state) {
         case MPMusicPlaybackStateStopped:
         {
+            self.pauseButton.selected = NO;
             self.pauseButton.enabled = NO;
             self.stopButton.enabled = NO;
         }

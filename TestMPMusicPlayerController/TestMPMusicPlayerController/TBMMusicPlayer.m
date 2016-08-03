@@ -33,13 +33,6 @@
     return self;
 }
 
-- (void)playWithMediaItem:(MPMediaItem *)mediaItem {
-    [self.musicPlayerController stop];
-    
-    [self.musicPlayerController setNowPlayingItem:mediaItem];
-    [self.musicPlayerController play]; //  测试：是否不需要调用play方法
-}
-
 - (void)playWithItemCollection:(MPMediaItemCollection *)itemCollection {
     [self.musicPlayerController stop];
     
