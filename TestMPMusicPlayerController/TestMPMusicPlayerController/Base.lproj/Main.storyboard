@@ -46,15 +46,8 @@
                                     <action selector="actionPrevious:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UMG-8o-GNP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYv-yv-mjO">
-                                <rect key="frame" x="342" y="132" width="42" height="30"/>
-                                <state key="normal" title="Next"/>
-                                <connections>
-                                    <action selector="actionNext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mKi-bZ-JMm"/>
-                                </connections>
-                            </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PqX-I9-3Vt">
-                                <rect key="frame" x="97" y="169" width="239" height="31"/>
+                                <rect key="frame" x="97" y="169" width="194" height="31"/>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Volume:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPj-HF-VAN">
                                 <rect key="frame" x="29" y="167" width="62" height="21"/>
@@ -63,16 +56,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JFk-VR-Qje">
-                                <rect key="frame" x="97" y="132" width="239" height="31"/>
+                                <rect key="frame" x="97" y="132" width="194" height="31"/>
                             </slider>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yX2-2e-ICA">
-                                <rect key="frame" x="20" y="207" width="364" height="210"/>
+                                <rect key="frame" x="20" y="207" width="319" height="210"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="mHs-Bq-8IF"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="PvZ-Pw-Y2o"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYv-yv-mjO">
+                                <rect key="frame" x="297" y="132" width="42" height="30"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="actionNext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mKi-bZ-JMm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
