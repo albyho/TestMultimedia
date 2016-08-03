@@ -181,7 +181,14 @@
 }
 
 - (void)tbmMusicPlayer:(TBMMusicPlayer *)tbmMusicPlayer nowPlayingItemDidChange:(MPMediaEntityPersistentID)persistentID indexOfNowPlayingItem:(NSUInteger)indexOfNowPlayingItem {
-    if(indexOfNowPlayingItem >= self.mediaItemCollection.count) return;
+    
+    // Previous如果没有上一首 或 Next如果没有下一首会停止播放，取消选择。
+    [self.playbackTableView deselectRowAtIndexPath:self.playbackTableView.indexPathForSelectedRow animated:YES];
+
+    if(indexOfNowPlayingItem >= self.mediaItemCollection.count) {
+        return;
+    }
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:indexOfNowPlayingItem inSection:0];
     [self.playbackTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
@@ -193,6 +200,7 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.musicPlayer.musicPlayerController setNowPlayingItem:[self.mediaItemCollection.items objectAtIndex:indexPath.row]];
+    [self.musicPlayer.musicPlayerController play];
 }
 
 #pragma mark - UITableViewDataSource
