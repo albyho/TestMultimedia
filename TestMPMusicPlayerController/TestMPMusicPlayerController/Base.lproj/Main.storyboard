@@ -17,15 +17,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-NV-dsC">
+                                <rect key="frame" x="29" y="94" width="46" height="30"/>
+                                <state key="normal" title="Select"/>
+                                <connections>
+                                    <action selector="actionSelect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1eN-W1-YKd"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-YG-647">
-                                <rect key="frame" x="20" y="94" width="46" height="30"/>
+                                <rect key="frame" x="99" y="94" width="46" height="30"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
                                     <action selector="actionPlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ALa-Wf-HIx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KrF-wQ-ivu">
-                                <rect key="frame" x="76" y="94" width="42" height="30"/>
+                                <rect key="frame" x="155" y="94" width="42" height="30"/>
                                 <state key="normal" title="Pause"/>
                                 <state key="selected" title="Resume"/>
                                 <connections>
@@ -33,7 +40,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBP-li-Nb5">
-                                <rect key="frame" x="131" y="94" width="42" height="30"/>
+                                <rect key="frame" x="210" y="94" width="42" height="30"/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
                                     <action selector="actionStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jWo-35-XRZ"/>
@@ -83,6 +90,7 @@
                         <outlet property="playbackTableView" destination="yX2-2e-ICA" id="Rgt-qd-tgT"/>
                         <outlet property="previousButton" destination="bzk-mq-uYK" id="BFm-Gp-O26"/>
                         <outlet property="progressSlider" destination="JFk-VR-Qje" id="irb-mj-ccl"/>
+                        <outlet property="selectButton" destination="2Wo-NV-dsC" id="lNc-b7-Ink"/>
                         <outlet property="stopButton" destination="hBP-li-Nb5" id="xy0-hd-aH7"/>
                         <outlet property="volumeSlider" destination="PqX-I9-3Vt" id="q1Y-af-Qk9"/>
                     </connections>

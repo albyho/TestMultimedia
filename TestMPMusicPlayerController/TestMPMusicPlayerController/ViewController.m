@@ -11,6 +11,7 @@
 
 @interface ViewController ()<MPMediaPickerControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UIButton *selectButton;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
@@ -45,18 +46,23 @@
     [self.view addSubview:self.volumeView];
     self.volumeSlider.hidden = YES;
 
-    self.musicPlayerController = MPMusicPlayerController.systemMusicPlayer;
+    self.musicPlayerController = MPMusicPlayerController.applicationMusicPlayer;
     self.musicPlayerController.repeatMode = MPMusicRepeatModeDefault;
     self.musicPlayerController.shuffleMode = MPMusicRepeatModeDefault;
     [self.musicPlayerController beginGeneratingPlaybackNotifications];
     [self addObservers];
     
+    self.playButton.enabled = NO;
     self.pauseButton.enabled = NO;
     self.stopButton.enabled = NO;
+    
+    self.previousButton.enabled = NO;
+    self.progressSlider.enabled = NO;
+    self.nextButton.enabled = NO;
 }
 
 #pragma mark - Actions
-- (IBAction)actionPlay:(UIButton *)sender {
+- (IBAction)actionSelect:(UIButton *)sender {
     MPMediaPickerController * mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
     if(mediaPicker != nil) {
         NSLog(@"Successfully instantiated a media picker");
@@ -67,29 +73,45 @@
     } else {
         NSLog(@"Could not instantiate a media picker");
     }
+
+}
+
+- (IBAction)actionPlay:(UIButton *)sender {
+    [self.musicPlayerController play];
+    
+    self.playButton.enabled = NO;
+    self.pauseButton.enabled = YES;
+    self.stopButton.enabled = YES;
 }
 
 - (IBAction)actionPause:(UIButton *)sender {
-    if(!sender.isSelected) {
-        [self.musicPlayerController pause];
-    } else {
-        [self.musicPlayerController play];
-    }
+    [self.musicPlayerController pause];
+    
+    self.playButton.enabled = YES;
+    self.pauseButton.enabled = NO;
+    self.stopButton.enabled = YES;
 }
 
 - (IBAction)actionStop:(UIButton *)sender {
     [self.musicPlayerController stop];
-    self.pauseButton.selected = NO;
+    
+    self.playButton.enabled = YES;
+    self.pauseButton.enabled = NO;
+    self.stopButton.enabled = NO;
 }
 
 - (IBAction)actionPrevious:(UIButton *)sender {
-    // TODO: 判断是否有上一首，最好的做法是在UI上控制按钮的可用性或可见性。
     [self.musicPlayerController skipToPreviousItem];
+    
+    // 确保暂停时能继续播放
+    [self actionPlay:self.playButton];
 }
 
 - (IBAction)actionNext:(UIButton *)sender {
-    // TODO: 判断是否有下一首，最好的做法是在UI上控制按钮的可用性或可见性。
     [self.musicPlayerController skipToNextItem];
+    
+    // 确保暂停时能继续播放
+    [self actionPlay:self.playButton];
 }
 
 #pragma mark - MPMediaPickerControllerDelegate
@@ -202,21 +224,24 @@
     switch (state) {
         case MPMusicPlaybackStateStopped:
         {
-            self.pauseButton.selected = NO;
+            self.playButton.enabled = YES;
             self.pauseButton.enabled = NO;
             self.stopButton.enabled = NO;
         }
             break;
         case MPMusicPlaybackStatePlaying:
         {
+            self.playButton.enabled = NO;
             self.pauseButton.enabled = YES;
-            self.pauseButton.selected = NO;
             self.stopButton.enabled = YES;
         }
             break;
         case MPMusicPlaybackStatePaused:
+            
         {
-            self.pauseButton.selected = YES;
+            self.playButton.enabled = YES;
+            self.pauseButton.enabled = NO;
+            self.stopButton.enabled = YES;
         }
             break;
         default:
@@ -232,8 +257,21 @@
     // Previous如果没有上一首 或 Next如果没有下一首会停止播放，取消选择。
     [self.playbackTableView deselectRowAtIndexPath:self.playbackTableView.indexPathForSelectedRow animated:YES];
     
+    self.previousButton.enabled = NO;
+    self.nextButton.enabled = NO;
+
     if(self.musicPlayerController.indexOfNowPlayingItem >= self.mediaItemCollection.count) {
+        // 可能self.musicPlayerController.indexOfNowPlayingItem NSNotFound
         return;
+    }
+    
+    if(self.musicPlayerController.indexOfNowPlayingItem > 0) {
+        // 有上一首
+        self.previousButton.enabled = YES;
+    }
+    if(self.musicPlayerController.indexOfNowPlayingItem < self.mediaItemCollection.count - 1){
+        // 有下一首
+        self.nextButton.enabled = YES;
     }
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.musicPlayerController.indexOfNowPlayingItem inSection:0];
