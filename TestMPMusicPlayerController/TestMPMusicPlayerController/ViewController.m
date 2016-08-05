@@ -29,6 +29,7 @@
 
 @property (nonatomic)       MPMusicPlayerController *musicPlayerController;
 @property (nonatomic)       MPMediaItemCollection *mediaItemCollection;
+@property (nonatomic)       NSTimer *progressTimer;
 
 @end
 
@@ -41,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
+    
     self.volumeView.frame = self.volumeSlider.frame;
     [self.view addSubview:self.volumeView];
     self.volumeSlider.hidden = YES;
@@ -82,6 +83,9 @@
     self.playButton.enabled = NO;
     self.pauseButton.enabled = YES;
     self.stopButton.enabled = YES;
+    
+    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+    self.progressSlider.enabled = YES;
 }
 
 - (IBAction)actionPause:(UIButton *)sender {
@@ -98,6 +102,11 @@
     self.playButton.enabled = YES;
     self.pauseButton.enabled = NO;
     self.stopButton.enabled = NO;
+    
+    self.progressSlider.enabled = NO;
+    self.progressSlider.value = 0;
+    [self.progressTimer invalidate];
+    self.progressTimer = nil;
 }
 
 - (IBAction)actionPrevious:(UIButton *)sender {
@@ -112,6 +121,18 @@
     
     // 确保暂停时能继续播放
     [self actionPlay:self.playButton];
+}
+
+- (IBAction)actionProgressChanged:(UISlider *)sender {
+    if(!self.musicPlayerController.nowPlayingItem) return;
+    
+    self.musicPlayerController.currentPlaybackTime = self.musicPlayerController.nowPlayingItem.playbackDuration * sender.value;
+}
+
+- (void)updateProgress:(NSTimer *)timer {
+    if(!self.musicPlayerController.nowPlayingItem) return;
+    
+    self.progressSlider.value = self.musicPlayerController.currentPlaybackTime / self.musicPlayerController.nowPlayingItem.playbackDuration;
 }
 
 #pragma mark - MPMediaPickerControllerDelegate
@@ -168,7 +189,8 @@
 #endif
     
     [self.musicPlayerController setQueueWithItemCollection:mediaItemCollection];
-    [self.musicPlayerController play];
+    [self actionPlay:self.playButton];
+    
     [mediaPicker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -208,6 +230,7 @@
     [nc addObserver:self selector:@selector(nowPlayingItemDidChange:) name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:_musicPlayerController];
     [nc addObserver:self selector:@selector(volumeDidChange:) name:MPMusicPlayerControllerVolumeDidChangeNotification object:_musicPlayerController];
     ;
+    
 }
 
 - (void)removeObservers {
@@ -215,6 +238,7 @@
     [nc removeObserver:self name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:self.musicPlayerController];
     [nc removeObserver:self name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:self.musicPlayerController];
     [nc removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:self.musicPlayerController];
+    
 }
 
 - (void)musicPlaybackStateDidChange:(NSNotification *)notification {
@@ -227,6 +251,11 @@
             self.playButton.enabled = YES;
             self.pauseButton.enabled = NO;
             self.stopButton.enabled = NO;
+            
+            self.progressSlider.enabled = NO;
+            self.progressSlider.value = 0;
+            [self.progressTimer invalidate];
+            self.progressTimer = nil;
         }
             break;
         case MPMusicPlaybackStatePlaying:
@@ -239,9 +268,9 @@
         case MPMusicPlaybackStatePaused:
             
         {
-            self.playButton.enabled = YES;
+            self.playButton.enabled = self.musicPlayerController.nowPlayingItem != nil;
             self.pauseButton.enabled = NO;
-            self.stopButton.enabled = YES;
+            self.stopButton.enabled = self.musicPlayerController.nowPlayingItem != nil;
         }
             break;
         default:
@@ -261,7 +290,7 @@
     self.nextButton.enabled = NO;
 
     if(self.musicPlayerController.indexOfNowPlayingItem >= self.mediaItemCollection.count) {
-        // 可能self.musicPlayerController.indexOfNowPlayingItem NSNotFound
+        // self.musicPlayerController.indexOfNowPlayingItem可能NSNotFound
         return;
     }
     
