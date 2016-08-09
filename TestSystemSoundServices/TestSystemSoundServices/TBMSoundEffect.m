@@ -9,7 +9,7 @@
 #import "TBMSoundEffect.h"
 @import AudioToolbox;
 
-static void SoundFinished(SystemSoundID ssID, void* clientData) {
+static void TBMSoundEffectSoundFinished(SystemSoundID ssID, void* clientData) {
     NSLog(@"Finished!");
 }
 
@@ -50,7 +50,7 @@ static void SoundFinished(SystemSoundID ssID, void* clientData) {
                 NSLog(@"%s Failed to create instance", __FUNCTION__);
                 self = nil;
             }
-            AudioServicesAddSystemSoundCompletion(_soundID, NULL, NULL, &SoundFinished, NULL);
+            AudioServicesAddSystemSoundCompletion(_soundID, NULL, NULL, &TBMSoundEffectSoundFinished, NULL);
         }
     }
     return self;
