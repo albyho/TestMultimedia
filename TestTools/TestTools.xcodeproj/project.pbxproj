@@ -24,45 +24,25 @@
 		697683A71DF119B6005811E5 /* FFmpegAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6976839E1DF119B6005811E5 /* FFmpegAACEncoder.m */; };
 		697683AE1DF119D8005811E5 /* booty music 男女双声道混音.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 697683AA1DF119D8005811E5 /* booty music 男女双声道混音.mp3 */; };
 		697683BA1DF11A71005811E5 /* TBMParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683B91DF11A71005811E5 /* TBMParams.m */; };
-		697684801DF11AB5005811E5 /* CMMotionManager+Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683BF1DF11AB5005811E5 /* CMMotionManager+Shared.m */; };
-		697684811DF11AB5005811E5 /* MPMoviePlayerViewController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683C11DF11AB5005811E5 /* MPMoviePlayerViewController+Rotation.m */; };
 		697684821DF11AB5005811E5 /* NSArray+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683C31DF11AB5005811E5 /* NSArray+Helper.m */; };
-		697684831DF11AB5005811E5 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683C51DF11AB5005811E5 /* NSDate+Helper.m */; };
 		697684841DF11AB5005811E5 /* NSDictionary+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683C71DF11AB5005811E5 /* NSDictionary+Helper.m */; };
 		697684851DF11AB5005811E5 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683C91DF11AB5005811E5 /* NSMutableArray+QueueAdditions.m */; };
 		697684861DF11AB5005811E5 /* NSMutableData+SnapAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683CB1DF11AB5005811E5 /* NSMutableData+SnapAdditions.m */; };
-		697684871DF11AB5005811E5 /* UIButton+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683CD1DF11AB5005811E5 /* UIButton+Helper.m */; };
-		697684881DF11AB5005811E5 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683CF1DF11AB5005811E5 /* UIColor+Helper.m */; };
-		697684891DF11AB5005811E5 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683D11DF11AB5005811E5 /* UIImage+Helper.m */; };
-		6976848A1DF11AB5005811E5 /* UIImage+RotateFlip.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683D31DF11AB5005811E5 /* UIImage+RotateFlip.m */; };
-		6976848B1DF11AB5005811E5 /* UINavigationBar+HairlineAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683D51DF11AB5005811E5 /* UINavigationBar+HairlineAdditions.m */; };
-		6976848C1DF11AB5005811E5 /* UINavigationController+Rotation_iOS6.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683D71DF11AB5005811E5 /* UINavigationController+Rotation_iOS6.m */; };
-		6976848D1DF11AB5005811E5 /* UITableView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683D91DF11AB5005811E5 /* UITableView+Helper.m */; };
-		6976848E1DF11AB5005811E5 /* UITableViewCell+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683DB1DF11AB5005811E5 /* UITableViewCell+Helper.m */; };
-		6976848F1DF11AB5005811E5 /* UITextField+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683DD1DF11AB5005811E5 /* UITextField+Helper.m */; };
-		697684901DF11AB5005811E5 /* UIView+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683DF1DF11AB5005811E5 /* UIView+Debug.m */; };
-		697684911DF11AB5005811E5 /* UIView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683E11DF11AB5005811E5 /* UIView+Helper.m */; };
-		697684921DF11AB5005811E5 /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683E31DF11AB5005811E5 /* UIView+Position.m */; };
-		697684931DF11AB5005811E5 /* UIViewController+Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683E51DF11AB5005811E5 /* UIViewController+Show.m */; };
-		697684941DF11AB5005811E5 /* CounterUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683E81DF11AB5005811E5 /* CounterUtils.m */; };
-		697684951DF11AB5005811E5 /* DataReaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683EA1DF11AB5005811E5 /* DataReaderUtils.m */; };
-		697684961DF11AB5005811E5 /* DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683EC1DF11AB5005811E5 /* DateUtils.m */; };
-		697684971DF11AB5005811E5 /* FileManagerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683EE1DF11AB5005811E5 /* FileManagerUtils.m */; };
-		697684981DF11AB5005811E5 /* HexUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683F01DF11AB5005811E5 /* HexUtils.m */; };
 		697684991DF11AB5005811E5 /* ProjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683F21DF11AB5005811E5 /* ProjectUtils.m */; };
 		6976849A1DF11AB5005811E5 /* VideoUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683F41DF11AB5005811E5 /* VideoUtils.m */; };
-		6976849B1DF11AB5005811E5 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684741DF11AB5005811E5 /* libavcodec.a */; };
-		6976849C1DF11AB5005811E5 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684751DF11AB5005811E5 /* libavfilter.a */; };
-		6976849D1DF11AB5005811E5 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684761DF11AB5005811E5 /* libavformat.a */; };
-		6976849E1DF11AB5005811E5 /* libavresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684771DF11AB5005811E5 /* libavresample.a */; };
-		6976849F1DF11AB5005811E5 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684781DF11AB5005811E5 /* libavutil.a */; };
-		697684A01DF11AB5005811E5 /* libfaac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684791DF11AB5005811E5 /* libfaac.a */; };
-		697684A11DF11AB5005811E5 /* libfdk-aac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847A1DF11AB5005811E5 /* libfdk-aac.a */; };
-		697684A21DF11AB5005811E5 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847B1DF11AB5005811E5 /* libmp3lame.a */; };
-		697684A31DF11AB5005811E5 /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847C1DF11AB5005811E5 /* libpostproc.a */; };
-		697684A41DF11AB5005811E5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847D1DF11AB5005811E5 /* libswresample.a */; };
-		697684A51DF11AB5005811E5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847E1DF11AB5005811E5 /* libswscale.a */; };
-		697684A61DF11AB5005811E5 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847F1DF11AB5005811E5 /* libx264.a */; };
+		697685961DF11B51005811E5 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684741DF11AB5005811E5 /* libavcodec.a */; };
+		697685971DF11B51005811E5 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684751DF11AB5005811E5 /* libavfilter.a */; };
+		697685981DF11B51005811E5 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684761DF11AB5005811E5 /* libavformat.a */; };
+		697685991DF11B51005811E5 /* libavresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684771DF11AB5005811E5 /* libavresample.a */; };
+		6976859A1DF11B51005811E5 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684781DF11AB5005811E5 /* libavutil.a */; };
+		6976859B1DF11B51005811E5 /* libfaac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697684791DF11AB5005811E5 /* libfaac.a */; };
+		6976859C1DF11B51005811E5 /* libfdk-aac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847A1DF11AB5005811E5 /* libfdk-aac.a */; };
+		6976859D1DF11B51005811E5 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847B1DF11AB5005811E5 /* libmp3lame.a */; };
+		6976859E1DF11B51005811E5 /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847C1DF11AB5005811E5 /* libpostproc.a */; };
+		6976859F1DF11B51005811E5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847D1DF11AB5005811E5 /* libswresample.a */; };
+		697685A01DF11B51005811E5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847E1DF11AB5005811E5 /* libswscale.a */; };
+		697685A11DF11B51005811E5 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847F1DF11AB5005811E5 /* libx264.a */; };
+		697685A31DF11C94005811E5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 697685A21DF11C94005811E5 /* libiconv.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,56 +78,14 @@
 		697683B71DF11A71005811E5 /* TBMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMDefines.h; sourceTree = "<group>"; };
 		697683B81DF11A71005811E5 /* TBMParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMParams.h; sourceTree = "<group>"; };
 		697683B91DF11A71005811E5 /* TBMParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMParams.m; sourceTree = "<group>"; };
-		697683BE1DF11AB5005811E5 /* CMMotionManager+Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CMMotionManager+Shared.h"; sourceTree = "<group>"; };
-		697683BF1DF11AB5005811E5 /* CMMotionManager+Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CMMotionManager+Shared.m"; sourceTree = "<group>"; };
-		697683C01DF11AB5005811E5 /* MPMoviePlayerViewController+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MPMoviePlayerViewController+Rotation.h"; sourceTree = "<group>"; };
-		697683C11DF11AB5005811E5 /* MPMoviePlayerViewController+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPMoviePlayerViewController+Rotation.m"; sourceTree = "<group>"; };
 		697683C21DF11AB5005811E5 /* NSArray+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helper.h"; sourceTree = "<group>"; };
 		697683C31DF11AB5005811E5 /* NSArray+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Helper.m"; sourceTree = "<group>"; };
-		697683C41DF11AB5005811E5 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
-		697683C51DF11AB5005811E5 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		697683C61DF11AB5005811E5 /* NSDictionary+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Helper.h"; sourceTree = "<group>"; };
 		697683C71DF11AB5005811E5 /* NSDictionary+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Helper.m"; sourceTree = "<group>"; };
 		697683C81DF11AB5005811E5 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
 		697683C91DF11AB5005811E5 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		697683CA1DF11AB5005811E5 /* NSMutableData+SnapAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+SnapAdditions.h"; sourceTree = "<group>"; };
 		697683CB1DF11AB5005811E5 /* NSMutableData+SnapAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+SnapAdditions.m"; sourceTree = "<group>"; };
-		697683CC1DF11AB5005811E5 /* UIButton+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Helper.h"; sourceTree = "<group>"; };
-		697683CD1DF11AB5005811E5 /* UIButton+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Helper.m"; sourceTree = "<group>"; };
-		697683CE1DF11AB5005811E5 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
-		697683CF1DF11AB5005811E5 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
-		697683D01DF11AB5005811E5 /* UIImage+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Helper.h"; sourceTree = "<group>"; };
-		697683D11DF11AB5005811E5 /* UIImage+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Helper.m"; sourceTree = "<group>"; };
-		697683D21DF11AB5005811E5 /* UIImage+RotateFlip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RotateFlip.h"; sourceTree = "<group>"; };
-		697683D31DF11AB5005811E5 /* UIImage+RotateFlip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RotateFlip.m"; sourceTree = "<group>"; };
-		697683D41DF11AB5005811E5 /* UINavigationBar+HairlineAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+HairlineAdditions.h"; sourceTree = "<group>"; };
-		697683D51DF11AB5005811E5 /* UINavigationBar+HairlineAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+HairlineAdditions.m"; sourceTree = "<group>"; };
-		697683D61DF11AB5005811E5 /* UINavigationController+Rotation_iOS6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Rotation_iOS6.h"; sourceTree = "<group>"; };
-		697683D71DF11AB5005811E5 /* UINavigationController+Rotation_iOS6.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Rotation_iOS6.m"; sourceTree = "<group>"; };
-		697683D81DF11AB5005811E5 /* UITableView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Helper.h"; sourceTree = "<group>"; };
-		697683D91DF11AB5005811E5 /* UITableView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Helper.m"; sourceTree = "<group>"; };
-		697683DA1DF11AB5005811E5 /* UITableViewCell+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Helper.h"; sourceTree = "<group>"; };
-		697683DB1DF11AB5005811E5 /* UITableViewCell+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Helper.m"; sourceTree = "<group>"; };
-		697683DC1DF11AB5005811E5 /* UITextField+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Helper.h"; sourceTree = "<group>"; };
-		697683DD1DF11AB5005811E5 /* UITextField+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Helper.m"; sourceTree = "<group>"; };
-		697683DE1DF11AB5005811E5 /* UIView+Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Debug.h"; sourceTree = "<group>"; };
-		697683DF1DF11AB5005811E5 /* UIView+Debug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Debug.m"; sourceTree = "<group>"; };
-		697683E01DF11AB5005811E5 /* UIView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helper.h"; sourceTree = "<group>"; };
-		697683E11DF11AB5005811E5 /* UIView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helper.m"; sourceTree = "<group>"; };
-		697683E21DF11AB5005811E5 /* UIView+Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Position.h"; sourceTree = "<group>"; };
-		697683E31DF11AB5005811E5 /* UIView+Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Position.m"; sourceTree = "<group>"; };
-		697683E41DF11AB5005811E5 /* UIViewController+Show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Show.h"; sourceTree = "<group>"; };
-		697683E51DF11AB5005811E5 /* UIViewController+Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Show.m"; sourceTree = "<group>"; };
-		697683E71DF11AB5005811E5 /* CounterUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CounterUtils.h; sourceTree = "<group>"; };
-		697683E81DF11AB5005811E5 /* CounterUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CounterUtils.m; sourceTree = "<group>"; };
-		697683E91DF11AB5005811E5 /* DataReaderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataReaderUtils.h; sourceTree = "<group>"; };
-		697683EA1DF11AB5005811E5 /* DataReaderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataReaderUtils.m; sourceTree = "<group>"; };
-		697683EB1DF11AB5005811E5 /* DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtils.h; sourceTree = "<group>"; };
-		697683EC1DF11AB5005811E5 /* DateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtils.m; sourceTree = "<group>"; };
-		697683ED1DF11AB5005811E5 /* FileManagerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManagerUtils.h; sourceTree = "<group>"; };
-		697683EE1DF11AB5005811E5 /* FileManagerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManagerUtils.m; sourceTree = "<group>"; };
-		697683EF1DF11AB5005811E5 /* HexUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexUtils.h; sourceTree = "<group>"; };
-		697683F01DF11AB5005811E5 /* HexUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexUtils.m; sourceTree = "<group>"; };
 		697683F11DF11AB5005811E5 /* ProjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectUtils.h; sourceTree = "<group>"; };
 		697683F21DF11AB5005811E5 /* ProjectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectUtils.m; sourceTree = "<group>"; };
 		697683F31DF11AB5005811E5 /* VideoUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoUtils.h; sourceTree = "<group>"; };
@@ -280,6 +218,7 @@
 		6976847D1DF11AB5005811E5 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswresample.a; sourceTree = "<group>"; };
 		6976847E1DF11AB5005811E5 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
 		6976847F1DF11AB5005811E5 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
+		697685A21DF11C94005811E5 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,18 +226,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				697684A11DF11AB5005811E5 /* libfdk-aac.a in Frameworks */,
-				697684A21DF11AB5005811E5 /* libmp3lame.a in Frameworks */,
-				697684A51DF11AB5005811E5 /* libswscale.a in Frameworks */,
-				6976849F1DF11AB5005811E5 /* libavutil.a in Frameworks */,
-				6976849D1DF11AB5005811E5 /* libavformat.a in Frameworks */,
-				697684A01DF11AB5005811E5 /* libfaac.a in Frameworks */,
-				6976849E1DF11AB5005811E5 /* libavresample.a in Frameworks */,
-				697684A41DF11AB5005811E5 /* libswresample.a in Frameworks */,
-				6976849C1DF11AB5005811E5 /* libavfilter.a in Frameworks */,
-				697684A31DF11AB5005811E5 /* libpostproc.a in Frameworks */,
-				6976849B1DF11AB5005811E5 /* libavcodec.a in Frameworks */,
-				697684A61DF11AB5005811E5 /* libx264.a in Frameworks */,
+				697685A31DF11C94005811E5 /* libiconv.tbd in Frameworks */,
+				697685961DF11B51005811E5 /* libavcodec.a in Frameworks */,
+				697685971DF11B51005811E5 /* libavfilter.a in Frameworks */,
+				697685981DF11B51005811E5 /* libavformat.a in Frameworks */,
+				697685991DF11B51005811E5 /* libavresample.a in Frameworks */,
+				6976859A1DF11B51005811E5 /* libavutil.a in Frameworks */,
+				6976859B1DF11B51005811E5 /* libfaac.a in Frameworks */,
+				6976859C1DF11B51005811E5 /* libfdk-aac.a in Frameworks */,
+				6976859D1DF11B51005811E5 /* libmp3lame.a in Frameworks */,
+				6976859E1DF11B51005811E5 /* libpostproc.a in Frameworks */,
+				6976859F1DF11B51005811E5 /* libswresample.a in Frameworks */,
+				697685A01DF11B51005811E5 /* libswscale.a in Frameworks */,
+				697685A11DF11B51005811E5 /* libx264.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +250,7 @@
 			children = (
 				697683721DF1197A005811E5 /* TestTools */,
 				697683711DF1197A005811E5 /* Products */,
+				697685931DF11B3C005811E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -430,46 +371,14 @@
 		697683BD1DF11AB5005811E5 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				697683BE1DF11AB5005811E5 /* CMMotionManager+Shared.h */,
-				697683BF1DF11AB5005811E5 /* CMMotionManager+Shared.m */,
-				697683C01DF11AB5005811E5 /* MPMoviePlayerViewController+Rotation.h */,
-				697683C11DF11AB5005811E5 /* MPMoviePlayerViewController+Rotation.m */,
 				697683C21DF11AB5005811E5 /* NSArray+Helper.h */,
 				697683C31DF11AB5005811E5 /* NSArray+Helper.m */,
-				697683C41DF11AB5005811E5 /* NSDate+Helper.h */,
-				697683C51DF11AB5005811E5 /* NSDate+Helper.m */,
 				697683C61DF11AB5005811E5 /* NSDictionary+Helper.h */,
 				697683C71DF11AB5005811E5 /* NSDictionary+Helper.m */,
 				697683C81DF11AB5005811E5 /* NSMutableArray+QueueAdditions.h */,
 				697683C91DF11AB5005811E5 /* NSMutableArray+QueueAdditions.m */,
 				697683CA1DF11AB5005811E5 /* NSMutableData+SnapAdditions.h */,
 				697683CB1DF11AB5005811E5 /* NSMutableData+SnapAdditions.m */,
-				697683CC1DF11AB5005811E5 /* UIButton+Helper.h */,
-				697683CD1DF11AB5005811E5 /* UIButton+Helper.m */,
-				697683CE1DF11AB5005811E5 /* UIColor+Helper.h */,
-				697683CF1DF11AB5005811E5 /* UIColor+Helper.m */,
-				697683D01DF11AB5005811E5 /* UIImage+Helper.h */,
-				697683D11DF11AB5005811E5 /* UIImage+Helper.m */,
-				697683D21DF11AB5005811E5 /* UIImage+RotateFlip.h */,
-				697683D31DF11AB5005811E5 /* UIImage+RotateFlip.m */,
-				697683D41DF11AB5005811E5 /* UINavigationBar+HairlineAdditions.h */,
-				697683D51DF11AB5005811E5 /* UINavigationBar+HairlineAdditions.m */,
-				697683D61DF11AB5005811E5 /* UINavigationController+Rotation_iOS6.h */,
-				697683D71DF11AB5005811E5 /* UINavigationController+Rotation_iOS6.m */,
-				697683D81DF11AB5005811E5 /* UITableView+Helper.h */,
-				697683D91DF11AB5005811E5 /* UITableView+Helper.m */,
-				697683DA1DF11AB5005811E5 /* UITableViewCell+Helper.h */,
-				697683DB1DF11AB5005811E5 /* UITableViewCell+Helper.m */,
-				697683DC1DF11AB5005811E5 /* UITextField+Helper.h */,
-				697683DD1DF11AB5005811E5 /* UITextField+Helper.m */,
-				697683DE1DF11AB5005811E5 /* UIView+Debug.h */,
-				697683DF1DF11AB5005811E5 /* UIView+Debug.m */,
-				697683E01DF11AB5005811E5 /* UIView+Helper.h */,
-				697683E11DF11AB5005811E5 /* UIView+Helper.m */,
-				697683E21DF11AB5005811E5 /* UIView+Position.h */,
-				697683E31DF11AB5005811E5 /* UIView+Position.m */,
-				697683E41DF11AB5005811E5 /* UIViewController+Show.h */,
-				697683E51DF11AB5005811E5 /* UIViewController+Show.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -477,16 +386,6 @@
 		697683E61DF11AB5005811E5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				697683E71DF11AB5005811E5 /* CounterUtils.h */,
-				697683E81DF11AB5005811E5 /* CounterUtils.m */,
-				697683E91DF11AB5005811E5 /* DataReaderUtils.h */,
-				697683EA1DF11AB5005811E5 /* DataReaderUtils.m */,
-				697683EB1DF11AB5005811E5 /* DateUtils.h */,
-				697683EC1DF11AB5005811E5 /* DateUtils.m */,
-				697683ED1DF11AB5005811E5 /* FileManagerUtils.h */,
-				697683EE1DF11AB5005811E5 /* FileManagerUtils.m */,
-				697683EF1DF11AB5005811E5 /* HexUtils.h */,
-				697683F01DF11AB5005811E5 /* HexUtils.m */,
 				697683F11DF11AB5005811E5 /* ProjectUtils.h */,
 				697683F21DF11AB5005811E5 /* ProjectUtils.m */,
 				697683F31DF11AB5005811E5 /* VideoUtils.h */,
@@ -710,6 +609,14 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		697685931DF11B3C005811E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				697685A21DF11C94005811E5 /* libiconv.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -787,40 +694,19 @@
 				6976837B1DF1197A005811E5 /* ViewController.m in Sources */,
 				697683A71DF119B6005811E5 /* FFmpegAACEncoder.m in Sources */,
 				697683A01DF119B6005811E5 /* TBMADTS.c in Sources */,
-				697684921DF11AB5005811E5 /* UIView+Position.m in Sources */,
-				6976848A1DF11AB5005811E5 /* UIImage+RotateFlip.m in Sources */,
 				697683781DF1197A005811E5 /* AppDelegate.m in Sources */,
-				6976848F1DF11AB5005811E5 /* UITextField+Helper.m in Sources */,
 				697684841DF11AB5005811E5 /* NSDictionary+Helper.m in Sources */,
 				697684991DF11AB5005811E5 /* ProjectUtils.m in Sources */,
-				697684891DF11AB5005811E5 /* UIImage+Helper.m in Sources */,
-				697684981DF11AB5005811E5 /* HexUtils.m in Sources */,
 				697684821DF11AB5005811E5 /* NSArray+Helper.m in Sources */,
-				697684911DF11AB5005811E5 /* UIView+Helper.m in Sources */,
-				697684971DF11AB5005811E5 /* FileManagerUtils.m in Sources */,
-				697684951DF11AB5005811E5 /* DataReaderUtils.m in Sources */,
-				697684801DF11AB5005811E5 /* CMMotionManager+Shared.m in Sources */,
-				6976848B1DF11AB5005811E5 /* UINavigationBar+HairlineAdditions.m in Sources */,
 				697684861DF11AB5005811E5 /* NSMutableData+SnapAdditions.m in Sources */,
 				697683751DF1197A005811E5 /* main.m in Sources */,
-				697684831DF11AB5005811E5 /* NSDate+Helper.m in Sources */,
 				697683BA1DF11A71005811E5 /* TBMParams.m in Sources */,
-				697684931DF11AB5005811E5 /* UIViewController+Show.m in Sources */,
 				697684851DF11AB5005811E5 /* NSMutableArray+QueueAdditions.m in Sources */,
 				697683A31DF119B6005811E5 /* FFmpegAACDecoder.m in Sources */,
-				697684941DF11AB5005811E5 /* CounterUtils.m in Sources */,
-				6976848C1DF11AB5005811E5 /* UINavigationController+Rotation_iOS6.m in Sources */,
-				697684961DF11AB5005811E5 /* DateUtils.m in Sources */,
-				697684881DF11AB5005811E5 /* UIColor+Helper.m in Sources */,
 				697683A41DF119B6005811E5 /* FFmpegAudioFileDecoder.m in Sources */,
-				697684871DF11AB5005811E5 /* UIButton+Helper.m in Sources */,
 				697683A61DF119B6005811E5 /* FAACAACEncoder.m in Sources */,
 				6976839F1DF119B6005811E5 /* FFmpegPCMResampler.m in Sources */,
-				697684811DF11AB5005811E5 /* MPMoviePlayerViewController+Rotation.m in Sources */,
-				6976848D1DF11AB5005811E5 /* UITableView+Helper.m in Sources */,
 				697683A11DF119B6005811E5 /* TBMALaw2PCMConverter.m in Sources */,
-				697684901DF11AB5005811E5 /* UIView+Debug.m in Sources */,
-				6976848E1DF11AB5005811E5 /* UITableViewCell+Helper.m in Sources */,
 				6976849A1DF11AB5005811E5 /* VideoUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -887,7 +773,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -929,7 +815,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -941,8 +827,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Libraries/FFmpeg/include";
 				INFOPLIST_FILE = TestTools/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Libraries/FFmpeg/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubumu.TestTools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -952,8 +841,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Libraries/FFmpeg/include";
 				INFOPLIST_FILE = TestTools/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Libraries/FFmpeg/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubumu.TestTools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
