@@ -11,9 +11,9 @@
 #import "ProjectUtils.h"
 #import "TBMADTS.h"
 
-#define kSameleRate     44100
-#define kBitDepth       16
-#define kChannelNumber  1
+#define kFFmpegAACDecoderSameleRate     44100
+#define kFFmpegAACDecoderBitDepth       16
+#define kFFmpegAACDecoderChannelNumber  1
 
 @interface FFmpegAACDecoder()
 {
@@ -67,9 +67,9 @@
     //_codecContext->bit_rate = 64000;
     //_codecContext->sample_fmt = AV_SAMPLE_FMT_S16;
     //_codecContext->channel_layout = AV_CH_LAYOUT_MONO;
-    //_codecContext->sample_rate = kSameleRate;
-    _codecContext->channels = kChannelNumber;
-    _codecContext->bits_per_coded_sample = kBitDepth;
+    //_codecContext->sample_rate = kFFmpegAACDecoderSameleRate;
+    _codecContext->channels = kFFmpegAACDecoderChannelNumber;
+    _codecContext->bits_per_coded_sample = kFFmpegAACDecoderBitDepth;
 
     int res = avcodec_open2(_codecContext, _codec, NULL);
     if (res < 0) {
@@ -88,14 +88,14 @@
     int res;
     
     _swrContext = swr_alloc_set_opts(NULL,                      // we're allocating a new context
-                                 AV_CH_LAYOUT_MONO,         // out_ch_layout
-                                 AV_SAMPLE_FMT_S16,         // out_sample_fmt
-                                 kSameleRate,               // out_sample_rate
+                                 AV_CH_LAYOUT_MONO,             // out_ch_layout
+                                 AV_SAMPLE_FMT_S16,             // out_sample_fmt
+                                 kFFmpegAACDecoderSameleRate,   // out_sample_rate
                                  av_get_default_channel_layout(_codecContext->channels), // in_ch_layout
                                  _codecContext->sample_fmt,     // in_sample_fmt
                                  _codecContext->sample_rate,    // in_sample_rate
-                                 0,                         // log_offset
-                                 NULL);                     // log_ctx
+                                 0,                             // log_offset
+                                 NULL);                         // log_ctx
     
     if ((res = swr_init(_swrContext)) < 0) {
         DLog(@"Could not allocate SwrContext\n");

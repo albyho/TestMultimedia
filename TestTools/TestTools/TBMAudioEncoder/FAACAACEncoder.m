@@ -10,10 +10,10 @@
 #import "ProjectUtils.h"
 #include <faac.h>
 
-#define kSampleRate      44100
-#define kChannelCount    1
-#define kBitDepth        16
-#define kSampleNumber    1024
+#define kFAACAACEncoderSampleRate      44100
+#define kFAACAACEncoderChannelCount    1
+#define kFAACAACEncoderBitDepth        16
+#define kFAACAACEncoderSampleNumber    1024
 
 @interface FAACAACEncoder ()
 {
@@ -39,9 +39,9 @@
 - (int)startup:(unsigned long)bitRate {
     [self shutdown];
     
-    _sampleRate = kSampleRate;
-    _channels = kChannelCount;
-    _bitDepth = kBitDepth;
+    _sampleRate = kFAACAACEncoderSampleRate;
+    _channels = kFAACAACEncoderChannelCount;
+    _bitDepth = kFAACAACEncoderBitDepth;
     _bitRate = bitRate;
     
     // (1) Open FAAC engine
@@ -81,7 +81,7 @@
     }
     
     // pcmbuffer必须为2048字节，这个由调用者来保证。inputSamples则为1024。
-    const int inputSamples = kSampleNumber; // 2048/(_bitDepth/8) = 2048/(16/8) = 1024
+    const int inputSamples = kFAACAACEncoderSampleNumber; // 2048/(_bitDepth/8) = 2048/(16/8) = 1024
     
     int ret;
     // (3) Encode
