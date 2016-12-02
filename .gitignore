@@ -2,3 +2,10 @@
 *.xcworkspace
 Podfile.lock
 Pods/
+
+*.mp3
+*.caf
+*.mov
+*.mp4
+*.aac
+*.pcm

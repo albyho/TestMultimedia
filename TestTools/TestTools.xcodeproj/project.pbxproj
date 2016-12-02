@@ -43,6 +43,9 @@
 		697685A01DF11B51005811E5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847E1DF11AB5005811E5 /* libswscale.a */; };
 		697685A11DF11B51005811E5 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847F1DF11AB5005811E5 /* libx264.a */; };
 		697685A31DF11C94005811E5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 697685A21DF11C94005811E5 /* libiconv.tbd */; };
+		697685A71DF11E9E005811E5 /* piano.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 697685A41DF11E9E005811E5 /* piano.m4a */; };
+		697685A81DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 697685A51DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 */; };
+		697685A91DF11E9E005811E5 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 697685A61DF11E9E005811E5 /* sound.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -219,6 +222,9 @@
 		6976847E1DF11AB5005811E5 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
 		6976847F1DF11AB5005811E5 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
 		697685A21DF11C94005811E5 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		697685A41DF11E9E005811E5 /* piano.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = piano.m4a; sourceTree = "<group>"; };
+		697685A51DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "She's Not Just A Pretty Face.mp3"; sourceTree = "<group>"; };
+		697685A61DF11E9E005811E5 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +340,9 @@
 		697683A81DF119D8005811E5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				697685A41DF11E9E005811E5 /* piano.m4a */,
+				697685A51DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 */,
+				697685A61DF11E9E005811E5 /* sound.caf */,
 				697683AA1DF119D8005811E5 /* booty music 男女双声道混音.mp3 */,
 			);
 			path = Resources;
@@ -675,10 +684,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				697685A71DF11E9E005811E5 /* piano.m4a in Resources */,
 				697683831DF1197A005811E5 /* LaunchScreen.storyboard in Resources */,
+				697685A81DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 in Resources */,
 				697683AE1DF119D8005811E5 /* booty music 男女双声道混音.mp3 in Resources */,
 				697683801DF1197A005811E5 /* Assets.xcassets in Resources */,
 				6976837E1DF1197A005811E5 /* Main.storyboard in Resources */,
+				697685A91DF11E9E005811E5 /* sound.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
