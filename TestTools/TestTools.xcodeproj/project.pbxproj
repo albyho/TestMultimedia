@@ -22,7 +22,6 @@
 		697683A51DF119B6005811E5 /* AudioConverterAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6976839A1DF119B6005811E5 /* AudioConverterAACEncoder.m */; };
 		697683A61DF119B6005811E5 /* FAACAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6976839C1DF119B6005811E5 /* FAACAACEncoder.m */; };
 		697683A71DF119B6005811E5 /* FFmpegAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6976839E1DF119B6005811E5 /* FFmpegAACEncoder.m */; };
-		697683AE1DF119D8005811E5 /* booty music 男女双声道混音.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 697683AA1DF119D8005811E5 /* booty music 男女双声道混音.mp3 */; };
 		697683BA1DF11A71005811E5 /* TBMParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683B91DF11A71005811E5 /* TBMParams.m */; };
 		697684821DF11AB5005811E5 /* NSArray+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683C31DF11AB5005811E5 /* NSArray+Helper.m */; };
 		697684841DF11AB5005811E5 /* NSDictionary+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683C71DF11AB5005811E5 /* NSDictionary+Helper.m */; };
@@ -43,9 +42,7 @@
 		697685A01DF11B51005811E5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847E1DF11AB5005811E5 /* libswscale.a */; };
 		697685A11DF11B51005811E5 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847F1DF11AB5005811E5 /* libx264.a */; };
 		697685A31DF11C94005811E5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 697685A21DF11C94005811E5 /* libiconv.tbd */; };
-		697685A71DF11E9E005811E5 /* piano.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 697685A41DF11E9E005811E5 /* piano.m4a */; };
-		697685A81DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 697685A51DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 */; };
-		697685A91DF11E9E005811E5 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 697685A61DF11E9E005811E5 /* sound.caf */; };
+		697685AF1DF1211A005811E5 /* booty music 男女双声道混音.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 697685AB1DF1211A005811E5 /* booty music 男女双声道混音.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,7 +74,6 @@
 		6976839C1DF119B6005811E5 /* FAACAACEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAACAACEncoder.m; sourceTree = "<group>"; };
 		6976839D1DF119B6005811E5 /* FFmpegAACEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFmpegAACEncoder.h; sourceTree = "<group>"; };
 		6976839E1DF119B6005811E5 /* FFmpegAACEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFmpegAACEncoder.m; sourceTree = "<group>"; };
-		697683AA1DF119D8005811E5 /* booty music 男女双声道混音.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "booty music 男女双声道混音.mp3"; sourceTree = "<group>"; };
 		697683B71DF11A71005811E5 /* TBMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMDefines.h; sourceTree = "<group>"; };
 		697683B81DF11A71005811E5 /* TBMParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMParams.h; sourceTree = "<group>"; };
 		697683B91DF11A71005811E5 /* TBMParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMParams.m; sourceTree = "<group>"; };
@@ -222,9 +218,7 @@
 		6976847E1DF11AB5005811E5 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
 		6976847F1DF11AB5005811E5 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
 		697685A21DF11C94005811E5 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		697685A41DF11E9E005811E5 /* piano.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = piano.m4a; sourceTree = "<group>"; };
-		697685A51DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "She's Not Just A Pretty Face.mp3"; sourceTree = "<group>"; };
-		697685A61DF11E9E005811E5 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
+		697685AB1DF1211A005811E5 /* booty music 男女双声道混音.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "booty music 男女双声道混音.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,7 +274,7 @@
 				6976837C1DF1197A005811E5 /* Main.storyboard */,
 				697683811DF1197A005811E5 /* LaunchScreen.storyboard */,
 				697683841DF1197A005811E5 /* Info.plist */,
-				697683A81DF119D8005811E5 /* Resources */,
+				697685AA1DF1211A005811E5 /* Resources */,
 				697683BB1DF11AB5005811E5 /* Libraries */,
 				6976838A1DF119B6005811E5 /* TBMAudioConverter */,
 				697683911DF119B6005811E5 /* TBMAudioDecoder */,
@@ -335,17 +329,6 @@
 				6976839E1DF119B6005811E5 /* FFmpegAACEncoder.m */,
 			);
 			path = TBMAudioEncoder;
-			sourceTree = "<group>";
-		};
-		697683A81DF119D8005811E5 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				697685A41DF11E9E005811E5 /* piano.m4a */,
-				697685A51DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 */,
-				697685A61DF11E9E005811E5 /* sound.caf */,
-				697683AA1DF119D8005811E5 /* booty music 男女双声道混音.mp3 */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		697683B61DF11A71005811E5 /* TBMUtils */ = {
@@ -626,6 +609,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		697685AA1DF1211A005811E5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				697685AB1DF1211A005811E5 /* booty music 男女双声道混音.mp3 */,
+			);
+			name = Resources;
+			path = ../../Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -684,13 +676,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				697685A71DF11E9E005811E5 /* piano.m4a in Resources */,
 				697683831DF1197A005811E5 /* LaunchScreen.storyboard in Resources */,
-				697685A81DF11E9E005811E5 /* She's Not Just A Pretty Face.mp3 in Resources */,
-				697683AE1DF119D8005811E5 /* booty music 男女双声道混音.mp3 in Resources */,
 				697683801DF1197A005811E5 /* Assets.xcassets in Resources */,
+				697685AF1DF1211A005811E5 /* booty music 男女双声道混音.mp3 in Resources */,
 				6976837E1DF1197A005811E5 /* Main.storyboard in Resources */,
-				697685A91DF11E9E005811E5 /* sound.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

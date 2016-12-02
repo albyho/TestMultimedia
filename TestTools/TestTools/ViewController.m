@@ -57,7 +57,7 @@
 }
 
 - (IBAction)actionButton2:(id)sender {
-//#define kWriteLen 1
+#define kWriteLen 1
     NSString *srcFilePath = [ViewController pathAtAppFiles:@"booty music 男女双声道混音.pcm"];
 #ifdef kWriteLen
     NSString *dstFilePath = [ViewController pathAtAppFiles:@"booty music 男女双声道混音(含包长).aac"];
