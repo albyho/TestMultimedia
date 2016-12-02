@@ -73,7 +73,7 @@
     return 0;
 }
 
-- (int)encodeWith:(void *)pcmBuffer {
+- (int)encodeWithPCMBuffer:(void *)pcmBuffer {
     if(_bitRate <= 0) {
         DLog(@"error:call startup first.");
         return 0;

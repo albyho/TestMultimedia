@@ -22,7 +22,7 @@
 
 - (int)startup:(unsigned long)bitRate;
 
-- (int)encodeWith:(void *)pcmBuffer;
+- (int)encodeWithPCMBuffer:(void *)pcmBuffer;
 
 - (int)shutdown;
 
