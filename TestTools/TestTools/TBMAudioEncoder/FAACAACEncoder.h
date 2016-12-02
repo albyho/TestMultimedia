@@ -21,7 +21,9 @@
 @property (nonatomic,readonly) uint8_t *aacBuffer;
 
 - (int)startup:(unsigned long)bitRate;
-- (int)encode:(int32_t *)pcmbuffer;
+
+- (int)encodeWith:(void *)pcmBuffer;
+
 - (int)shutdown;
 
 @end

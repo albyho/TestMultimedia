@@ -73,19 +73,18 @@
     return 0;
 }
 
-- (int)encode:(int32_t *)pcmbuffer
-{
+- (int)encodeWith:(void *)pcmBuffer {
     if(_bitRate <= 0) {
         DLog(@"error:call startup first.");
         return 0;
     }
     
-    // pcmbuffer必须为2048字节，这个由调用者来保证。inputSamples则为1024。
+    // pcmBuffer必须为2048字节，这个由调用者来保证。inputSamples则为1024。
     const int inputSamples = kFAACAACEncoderSampleNumber; // 2048/(_bitDepth/8) = 2048/(16/8) = 1024
     
     int ret;
     // (3) Encode
-    ret = faacEncEncode(_encoder, pcmbuffer, inputSamples, _aacBuffer, (unsigned int)_maxOutputSize);
+    ret = faacEncEncode(_encoder, (int32_t *)pcmBuffer, inputSamples, _aacBuffer, (unsigned int)_maxOutputSize);
     
     return ret; // 返回0也正常
 }
