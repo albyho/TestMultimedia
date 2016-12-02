@@ -129,7 +129,7 @@
     while(fread(&len, sizeof(uint32_t), 1, srcFile) == 1 && len < 1024 * 10) {
         if(fread(buffer, 1, len, srcFile) == len) {
             i++;
-            // 双帧解码
+            // 双包解码(新版 FFmpeg 不容易支持)
             /*
             if(i % 2 == 1) {
                 aacData = [NSMutableData dataWithData:[NSData dataWithBytes:buffer length:len]];
@@ -139,7 +139,7 @@
                 fwrite([pcmData bytes], 1, pcmData.length, dstFile);
             }
             //*/
-            // 单帧解码
+            // 单包解码
             //*
             NSData *pcmData = [self.aacDecoder decodeWithData:[NSData dataWithBytes:buffer length:len]];
             fwrite([pcmData bytes], 1, pcmData.length, dstFile);
@@ -185,7 +185,7 @@
     while(fread(&len, sizeof(uint32_t), 1, srcFile) == 1 && len < 1024 * 10) {
         if(fread(buffer, 1, len, srcFile) == len) {
             i++;
-            // 双帧解码
+            // 双包解码(AudioConverter需要知道有多少包)
             /*
             if(i % 2 == 1) {
                 aacData = [NSMutableData dataWithData:[NSData dataWithBytes:buffer length:len]];
@@ -195,7 +195,7 @@
                 fwrite([pcmData bytes], 1, pcmData.length, dstFile);
             }
             //*/
-            // 单帧解码
+            // 单包解码
             //*
              NSData *pcmData = [self.acAACDecoder decodeWithData:[NSData dataWithBytes:buffer length:len] start:7];
              fwrite([pcmData bytes], 1, pcmData.length, dstFile);
