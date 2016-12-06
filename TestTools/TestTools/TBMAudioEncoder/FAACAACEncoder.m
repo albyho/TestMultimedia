@@ -51,7 +51,7 @@
         return 1;
     }
     // _pcmSamples:1024 _maxOutputSize:768
-    
+
     // (2.1) Get current encoding configuration
     _configuration = faacEncGetCurrentConfiguration(_encoder);
     _configuration->mpegVersion = MPEG4;
@@ -62,7 +62,7 @@
     _configuration->quantqual = 100;     // 编码质量
     _configuration->bitRate = _bitRate;
     _configuration->outputFormat = 0;    // 0:Raw 1:ADTS
-    
+
     // (2.2) Set encoding configuration
     /*int ret = */faacEncSetConfiguration(_encoder, _configuration);
 

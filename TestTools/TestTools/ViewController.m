@@ -125,7 +125,7 @@
 
     uint32_t len;
     int i = 0;
-    NSMutableData *aacData;
+    __unused NSMutableData *aacData;
     while(fread(&len, sizeof(uint32_t), 1, srcFile) == 1 && len < 1024 * 10) {
         if(fread(buffer, 1, len, srcFile) == len) {
             i++;
@@ -181,7 +181,7 @@
     
     uint32_t len;
     int i = 0;
-    NSMutableData *aacData;
+    __unused NSMutableData *aacData;
     while(fread(&len, sizeof(uint32_t), 1, srcFile) == 1 && len < 1024 * 10) {
         if(fread(buffer, 1, len, srcFile) == len) {
             i++;
