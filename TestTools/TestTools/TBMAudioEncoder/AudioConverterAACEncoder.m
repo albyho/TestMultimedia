@@ -78,7 +78,7 @@ OSStatus AudioConverterAACEncoderComplexInputDataProc(AudioConverterRef         
     outAudioStreamBasicDescription.mBitsPerChannel = 0; // ... Set this field to 0 for compressed formats.
     outAudioStreamBasicDescription.mReserved = 0; // Pads the structure out to force an even 8-byte alignment. Must be set to 0.
     _outAudioStreamBasicDescription = outAudioStreamBasicDescription;
-    
+
     // Converter
     // 使用软编码
     AudioClassDescription *description = [self getAudioClassDescriptionWithType:kAudioFormatMPEG4AAC fromManufacturer:kAppleSoftwareAudioCodecManufacturer];

@@ -160,7 +160,7 @@
 
 - (IBAction)actionButton4:(id)sender {
     NSString *srcFilePath = [ViewController pathAtAppFiles:@"booty music 男女双声道混音(含包长).aac"];
-    NSString *dstFilePath = [ViewController pathAtAppFiles:@"booty music 男女双声道混音(重解码au).pcm"];
+    NSString *dstFilePath = [ViewController pathAtAppFiles:@"booty music 男女双声道混音(重解码ac).pcm"];
     
     NSLog(@"%@", dstFilePath);
     
@@ -219,8 +219,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-+ (NSString *)pathAtAppFiles:(NSString *)fileName
-{
++ (NSString *)pathAtAppFiles:(NSString *)fileName {
     //1、获取目录
     //获取Documents文件夹目录
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
