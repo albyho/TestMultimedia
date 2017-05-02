@@ -27,13 +27,13 @@
 #define	kSegmentLeftShift      (4)		/* Left shift for segment number. */
 #define	kSignBit               (0x80)   /* Sign bit for a A-law byte. */
 
-const AVRational usTimeBase = {1,1000000};
+const AVRational usTimeBase = {1, 1000000};
 
 @implementation FFmpegMP4Writer
 {
-    // 写入、保存标记
+    // 写入标记
     BOOL                  _isReadyToWrite;
-    BOOL                   _isReadyToSave;
+
     // 音频参数
     FFmpegMP4WriterAudioType   _audioType;
     int                       _sampleRate;
@@ -46,19 +46,27 @@ const AVRational usTimeBase = {1,1000000};
     // FFmpeg
     AVFormatContext     *_avFormatContext;
     
-    // Video
-    BOOL            _isWaitingForKeyFrame;
-    int                 _videoStreamIndex;
-    AVStream                 *videoStream;
+    // 按PTS写入
+    long long                  _vStartPTS;
+    long long                  _aStartPTS;
+    
+    // 按逐帧写入
     long long                   _videopts;
+    long long                   _audiopts;
+
+    // Video
+    int                 _videoStreamIndex;
+    AVStream                *_videoStream;
+    BOOL            _isWaitingForKeyFrame;
 
     // Audio
     int                 _audioStreamIndex;
-    AVFrame                  *_audioFrame;
     AVStream                *_audioStream;
+    
+    // 非AAC编码音频，需进行编码
+    AVFrame                  *_audioFrame;
     uint8_t                *_pTmpAudioBuf; // 音频临时缓冲区
     int                  _nTmpAudioBufLen; // 音频临时缓冲区长度
-    long long                   _audiopts;
 }
 
 +(void)initialize {
@@ -73,7 +81,7 @@ const AVRational usTimeBase = {1,1000000};
     if ( !self ) {
         return nil;
     }
- 
+    [self reset];
     return self;
 }
 
@@ -83,14 +91,12 @@ const AVRational usTimeBase = {1,1000000};
 
 - (void)destroy {
     if ( _avFormatContext ) {
-        if( _isReadyToWrite )
-        {
+        if( _isReadyToWrite ) {
             av_write_trailer(_avFormatContext);
         }
-        
-        if(videoStream) {
-            avcodec_close(videoStream->codec);
-            videoStream = NULL; // avformat_free_context:Free an _avFormatContext and all its streams.
+        if(_videoStream) {
+            avcodec_close(_videoStream->codec);
+            _videoStream = NULL; // avformat_free_context:Free an _avFormatContext and all its streams.
         }
         if(_audioStream) {
             avcodec_close(_audioStream->codec);
@@ -115,12 +121,13 @@ const AVRational usTimeBase = {1,1000000};
 
 - (void)reset {
     _isReadyToWrite = NO;
-    _isReadyToSave = NO;
     _videoStreamIndex = -1;
     _audioStreamIndex = -1;
     _isWaitingForKeyFrame = YES;
     _videopts = 0;
     _audiopts = 0;
+    _vStartPTS = -1;
+    _aStartPTS = -1;
 }
 
 - (BOOL)beginWriteUnusedAudioWithVideoFrameRate:(int)videoFrameRate width:(int)width height:(int)height error:(NSError **)error {
@@ -138,8 +145,8 @@ const AVRational usTimeBase = {1,1000000};
              videoFrameRate:videoFrameRate
                       width:width
                      height:height
-                 sampleRate:0
-                    bitRate:0
+                 sampleRate:sampleRate
+                    bitRate:bitRate
                       error:error];
 }
 - (BOOL)beginWriteUsePCMWithVideoFrameRate:(int)videoFrameRate width:(int)width height:(int)height sampleRate:(int)sampleRate bitRate:(uint64_t)bitRate error:(NSError **)error {
@@ -147,8 +154,8 @@ const AVRational usTimeBase = {1,1000000};
              videoFrameRate:videoFrameRate
                       width:width
                      height:height
-                 sampleRate:0
-                    bitRate:0
+                 sampleRate:sampleRate
+                    bitRate:bitRate
                       error:error];
 
 }
@@ -157,8 +164,8 @@ const AVRational usTimeBase = {1,1000000};
              videoFrameRate:videoFrameRate
                       width:width
                      height:height
-                 sampleRate:0
-                    bitRate:0
+                 sampleRate:sampleRate
+                    bitRate:bitRate
                       error:error];
 
 }
@@ -206,16 +213,6 @@ const AVRational usTimeBase = {1,1000000};
 - (BOOL)endWrite:(NSError **)error {
     [self destroy];
     [self reset];
-    
-    _isReadyToSave = YES;
-    
-    /*
-    if([self.delegate respondsToSelector:@selector(endWriteCallback:)])
-    {
-        [self.delegate endWriteCallback:@"保存录像成功,准备复制到相册."];
-    }
-    */
-    
     return YES;
 }
 
@@ -226,40 +223,8 @@ const AVRational usTimeBase = {1,1000000};
     [self.delegate error:errorCode message:messge];
 }
 
-/*
-- (void)beginWrite
-{
-    NSString *testVideoPath = [[NSBundle mainBundle] pathForResource:@"Test" ofType:@"mp4"];
-    NSData *testVideoData = [NSData dataWithContentsOfFile:testVideoPath];
-    
-    NSOutputStream *outputStream = [[NSOutputStream alloc] initToFileAtPath:kMP4TempFile append:YES];
-    [outputStream open];
-    
-    [outputStream write:[testVideoData bytes] maxLength:[testVideoData length]];
-
-}
-*/
-
 - (BOOL)saveVideo:(NSError **)error {
-    if( !_isReadyToSave ) {
-        [self error:700 message:@"保存录像到相册失败,录制时间过短."];
-        DLog(@"%@ MP4WriterTemp.mp4尚未准备好.", __FUNCTION_FILE_LINE__);
-        return NO;
-    }
-    /*
-    if( !videoName ) {
-        videoName = [NSString stringWithFormat:@"%@.mp4",[_dateTimeFormatter stringFromDate:[NSDate date]]];
-        DLog(@"%s 文件名参数为空,生成文件名:%@",__PRETTY_FUNCTION__,videoName);
-    }
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *videoPath = [[kMP4WriterTempFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:videoName];
-    DLog(@"%s 视频文件路径:%@",__PRETTY_FUNCTION__,videoPath);
-    if(![fileManager moveItemAtPath:kMP4WriterTempFile toPath:videoPath error:nil]) {
-        [self error:701 message:@"保存录像到相册失败,请再试."];
-        DLog(@"%s 无法将%@更名为%@",__PRETTY_FUNCTION__,kMP4WriterTempFile,videoPath);
-        return nil;
-    }
-    //*/
+    DLog(@"%@ 写入相册", __FUNCTION_FILE_LINE__);
     if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(kTempFile)) {
         UISaveVideoAtPathToSavedPhotosAlbum(kTempFile, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
         return YES;
@@ -274,11 +239,9 @@ const AVRational usTimeBase = {1,1000000};
 {
     DLog(@"%@ %@ %@", __FUNCTION_FILE_LINE__, videoPath, error);
     if(!error) {
-        //*
         if([self.delegate respondsToSelector:@selector(saveVideo:)]) {
             [self.delegate saveVideo:@"已经成功将录像保存到相册."];
         }
-        //*/
     } else {
         [self error:800 message:@"保存录像文件失败,请再试."];
     }
@@ -306,11 +269,6 @@ const AVRational usTimeBase = {1,1000000};
              error:(NSError **)error {
     int ret;
     
-    if ( _isReadyToSave ) {
-        [self endWrite:nil];
-        [self saveVideo:nil];
-    }
-    
     if(frameType != TBMFrameTypeVideoI && frameType != TBMFrameTypeVideoP && frameType != TBMFrameTypeAudio) {
         DLog(@"frame type error");
         return NO;
@@ -327,7 +285,7 @@ const AVRational usTimeBase = {1,1000000};
         
         void *pSpsPps=NULL;
         int spsPpsLen = 0;
-        if(![self find_spspps:(const unsigned char*)frameData strLen:frameDataLen pOut:&pSpsPps outLen:&spsPpsLen]) {
+        if(![self extractSPSPPS:(const unsigned char*)frameData strLen:frameDataLen pOut:&pSpsPps outLen:&spsPpsLen]) {
             DLog(@"could not find sps or pps");
             return NO;
         }
@@ -339,20 +297,18 @@ const AVRational usTimeBase = {1,1000000};
             DLog(@"could not deduce output format from file extension");
             [self destroy];
             return NO;
-            //DLog(@"could not deduce output format from file extension: using MPEG. ");
-            //avformat_alloc_output_context2(&_avFormatContext, NULL, "mpeg", distFile);
         }
         fmt = _avFormatContext->oformat;
         if (fmt->video_codec != AV_CODEC_ID_NONE) {
-            videoStream = [self addStream:_avFormatContext codec:&videoCodec codec_id:fmt->video_codec streamIndex:&_videoStreamIndex];
+            _videoStream = [self addStream:_avFormatContext codec:&videoCodec codec_id:fmt->video_codec streamIndex:&_videoStreamIndex];
         } else {
             DLog(@"video codec is none");
             [self destroy];
             return NO;
         }
         
-        if (videoStream) {
-            [self openVideo:_avFormatContext codec:videoCodec stream:videoStream spsPps:pSpsPps spsPpsLen:spsPpsLen];
+        if (_videoStream) {
+            [self openVideo:_avFormatContext codec:videoCodec stream:_videoStream spsPps:pSpsPps spsPpsLen:spsPpsLen];
         }
         
         free(pSpsPps);
@@ -428,25 +384,30 @@ const AVRational usTimeBase = {1,1000000};
     av_init_packet( &pkt );
     pkt.flags |= isKeyFrame?AV_PKT_FLAG_KEY:0;
     
-    pkt.stream_index = videoStream->index;
+    pkt.stream_index = _videoStream->index;
     pkt.data = (uint8_t*)(frameData + start);
     pkt.size = frameDataLen;
     
+    if(_vStartPTS < 0) {
+        _vStartPTS = pts;
+    }
     if(pts >= 0) {
-        pkt.pts = av_rescale_q(pts, usTimeBase, videoStream->time_base);;
+        pkt.pts = av_rescale_q(pts - _vStartPTS, usTimeBase, _videoStream->time_base);;
     } else {
-        pkt.pts = av_rescale_q(_videopts, videoStream->codec->time_base,videoStream->time_base);
+        pkt.pts = av_rescale_q(_videopts, _videoStream->codec->time_base, _videoStream->time_base);
     }
     pkt.dts = pkt.pts;
-    ret = av_interleaved_write_frame( _avFormatContext, &pkt );
+    //NSLog(@"V.... %lld %lld %lld", _vStartPTS, pts, pkt.pts);
+    pkt.duration = 0;
+    
+    ret = av_interleaved_write_frame( _avFormatContext, &pkt);
     av_packet_unref(&pkt);
     if ( 0 > ret ) {
         DLog(@"cannot write video frame");
         return NO;
-    } else {
-        _videopts++;
     }
     
+    _videopts++;
     return YES;
 }
 
@@ -461,34 +422,45 @@ const AVRational usTimeBase = {1,1000000};
     }
 
     int ret;
-    if ( 0 > _audioStreamIndex ) {
+    if (_audioStreamIndex < 0) {
         DLog(@"ai less than 0");
         return NO;
     }
 
-    if ( _isWaitingForKeyFrame ) {
+    if (_isWaitingForKeyFrame) {
         DLog(@"video key frame is not ready");
         return NO;
     }
     //AVStream *_audioStream = _avFormatContext->streams[ _audioStreamIndex ];
     
-    const void *data = frameData + start;
+    const void *data = frameData + start + 7/*adts*/;
     if(_audioType == FFmpegMP4WriterAudioTypeAAC) {
         AVPacket pkt = {0};
         av_init_packet(&pkt);
         pkt.stream_index = _audioStream->index;
         pkt.data = (uint8_t *)data;
-        pkt.size = frameDataLen;
+        pkt.size = frameDataLen - 7/*adts*/;
+        
+        if(_aStartPTS < 0) {
+            _aStartPTS = pts;
+        }
         if(pts >= 0) {
-            pkt.pts = av_rescale_q(_audiopts, usTimeBase, videoStream->time_base);;
+            pkt.pts = av_rescale_q(pts - _aStartPTS, usTimeBase, _audioStream->time_base);;
         } else {
             pkt.pts = av_rescale_q(_audiopts, _audioStream->codec->time_base, _audioStream->time_base);
         }
         pkt.dts = pkt.pts;
+        //NSLog(@"A.... %lld %lld %lld", _aStartPTS, pts, pkt.pts);
         pkt.duration = 0;
-        //pkt.duration = (int)av_rescale_q(pkt.duration, _audioStream->codec->time_base,_audioStream->time_base);
-        if (av_interleaved_write_frame( _avFormatContext, &pkt ) < 0) {
-            DLog(@"cannot write audio frame");
+        //pkt.duration = (int)av_rescale_q(pkt.duration, _audioStream->codec->time_base, _audioStream->time_base);
+        
+        int ret = av_interleaved_write_frame( _avFormatContext, &pkt);
+        if (ret < 0) {
+            char errbuf[128];
+            const char *errbuf_ptr = errbuf;
+            if (av_strerror(ret, errbuf, sizeof(errbuf)) < 0)
+                errbuf_ptr = strerror(AVUNERROR(ret));
+            DLog(@"cannot write audio frame %s", errbuf_ptr);
             av_packet_unref(&pkt);
             return NO;
         }
@@ -625,7 +597,7 @@ static int get_nal_type(const void *p, int len ) {
 }
 */
 
-- (bool)find_spspps:(const uint8_t *)pSrc
+- (bool)extractSPSPPS:(const uint8_t *)pSrc
              strLen:(int)srcLen
                pOut:(void **)pOut
              outLen:(int *)outLen {
@@ -664,7 +636,7 @@ static int get_nal_type(const void *p, int len ) {
 }
 
 /*
-static bool find_spspps1(const unsigned char* pSrc, int srcLen, void** pOut, int* outLen)
+static bool extractSPSPPS1(const unsigned char* pSrc, int srcLen, void** pOut, int* outLen)
 {
 	int i;
 	int begPos = -1;
@@ -748,8 +720,7 @@ static bool find_spspps1(const unsigned char* pSrc, int srcLen, void** pOut, int
     }
     
     st = avformat_new_stream(oc, *codec);
-    if (!st)
-    {
+    if (!st) {
         DLog(@"could not allocate stream \n");
         exit(1);
     }
@@ -794,6 +765,7 @@ static bool find_spspps1(const unsigned char* pSrc, int srcLen, void** pOut, int
             break;
     }
     
+    c->codec_tag = 0;
     if (oc->oformat->flags & AVFMT_GLOBALHEADER) {
         c->flags |= CODEC_FLAG_GLOBAL_HEADER;
     }
@@ -893,6 +865,140 @@ static bool find_spspps1(const unsigned char* pSrc, int srcLen, void** pOut, int
 	}
 	_nTmpAudioBufLen = 0;
 	return _audioFrame;
+}
+
+#pragma Test
+static void log_packet(const AVFormatContext *fmt_ctx, const AVPacket *pkt, const char *tag)
+{
+    AVRational *time_base = &fmt_ctx->streams[pkt->stream_index]->time_base;
+    
+    printf("%s: pts:%s pts_time:%s dts:%s dts_time:%s duration:%s duration_time:%s stream_index:%d\n",
+           tag,
+           av_ts2str(pkt->pts), av_ts2timestr(pkt->pts, time_base),
+           av_ts2str(pkt->dts), av_ts2timestr(pkt->dts, time_base),
+           av_ts2str(pkt->duration), av_ts2timestr(pkt->duration, time_base),
+           pkt->stream_index);
+}
+
+int mainRemuxing(int argc, char **argv)
+{
+    AVOutputFormat *ofmt = NULL;
+    AVFormatContext *ifmt_ctx = NULL, *ofmt_ctx = NULL;
+    AVPacket pkt;
+    const char *in_filename, *out_filename;
+    int ret, i;
+    
+    if (argc < 3) {
+        printf("usage: %s input output\n"
+               "API example program to remux a media file with libavformat and libavcodec.\n"
+               "The output format is guessed according to the file extension.\n"
+               "\n", argv[0]);
+        return 1;
+    }
+    
+    in_filename  = argv[1];
+    out_filename = argv[2];
+    
+    av_register_all();
+    
+    if ((ret = avformat_open_input(&ifmt_ctx, in_filename, 0, 0)) < 0) {
+        fprintf(stderr, "Could not open input file '%s'", in_filename);
+        goto end;
+    }
+    
+    if ((ret = avformat_find_stream_info(ifmt_ctx, 0)) < 0) {
+        fprintf(stderr, "Failed to retrieve input stream information");
+        goto end;
+    }
+    
+    av_dump_format(ifmt_ctx, 0, in_filename, 0);
+    
+    avformat_alloc_output_context2(&ofmt_ctx, NULL, NULL, out_filename);
+    if (!ofmt_ctx) {
+        fprintf(stderr, "Could not create output context\n");
+        ret = AVERROR_UNKNOWN;
+        goto end;
+    }
+    
+    ofmt = ofmt_ctx->oformat;
+    
+    for (i = 0; i < ifmt_ctx->nb_streams; i++) {
+        AVStream *in_stream = ifmt_ctx->streams[i];
+        AVStream *out_stream = avformat_new_stream(ofmt_ctx, in_stream->codec->codec);
+        if (!out_stream) {
+            fprintf(stderr, "Failed allocating output stream\n");
+            ret = AVERROR_UNKNOWN;
+            goto end;
+        }
+        
+        ret = avcodec_copy_context(out_stream->codec, in_stream->codec);
+        if (ret < 0) {
+            fprintf(stderr, "Failed to copy context from input to output stream codec context\n");
+            goto end;
+        }
+        out_stream->codec->codec_tag = 0;
+        if (ofmt_ctx->oformat->flags & AVFMT_GLOBALHEADER)
+            out_stream->codec->flags |= AV_CODEC_FLAG_GLOBAL_HEADER;
+    }
+    av_dump_format(ofmt_ctx, 0, out_filename, 1);
+    
+    if (!(ofmt->flags & AVFMT_NOFILE)) {
+        ret = avio_open(&ofmt_ctx->pb, out_filename, AVIO_FLAG_WRITE);
+        if (ret < 0) {
+            fprintf(stderr, "Could not open output file '%s'", out_filename);
+            goto end;
+        }
+    }
+    
+    ret = avformat_write_header(ofmt_ctx, NULL);
+    if (ret < 0) {
+        fprintf(stderr, "Error occurred when opening output file\n");
+        goto end;
+    }
+    
+    while (1) {
+        AVStream *in_stream, *out_stream;
+        
+        ret = av_read_frame(ifmt_ctx, &pkt);
+        if (ret < 0)
+            break;
+        
+        in_stream  = ifmt_ctx->streams[pkt.stream_index];
+        out_stream = ofmt_ctx->streams[pkt.stream_index];
+        
+        log_packet(ifmt_ctx, &pkt, "in");
+        
+        /* copy packet */
+        pkt.pts = av_rescale_q_rnd(pkt.pts, in_stream->time_base, out_stream->time_base, AV_ROUND_NEAR_INF|AV_ROUND_PASS_MINMAX);
+        pkt.dts = av_rescale_q_rnd(pkt.dts, in_stream->time_base, out_stream->time_base, AV_ROUND_NEAR_INF|AV_ROUND_PASS_MINMAX);
+        pkt.duration = av_rescale_q(pkt.duration, in_stream->time_base, out_stream->time_base);
+        pkt.pos = -1;
+        log_packet(ofmt_ctx, &pkt, "out");
+        
+        ret = av_interleaved_write_frame(ofmt_ctx, &pkt);
+        if (ret < 0) {
+            fprintf(stderr, "Error muxing packet\n");
+            break;
+        }
+        av_packet_unref(&pkt);
+    }
+    
+    av_write_trailer(ofmt_ctx);
+end:
+    
+    avformat_close_input(&ifmt_ctx);
+    
+    /* close output */
+    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
+        avio_closep(&ofmt_ctx->pb);
+    avformat_free_context(ofmt_ctx);
+    
+    if (ret < 0 && ret != AVERROR_EOF) {
+        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
+        return 1;
+    }
+    
+    return 0;
 }
 
 @end

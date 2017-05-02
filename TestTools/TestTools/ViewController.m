@@ -11,6 +11,8 @@
 #import "FFmpegAACEncoder.h"
 #import "FFmpegAACDecoder.h"
 #import "AudioConverterAACDecoder.h"
+#import "TBMDefines.h"
+#import "FFmpegMP4Writer.h"
 
 @interface ViewController ()
 
@@ -215,7 +217,59 @@
 }
 
 - (IBAction)actionButton5:(id)sender {
+#define USE_PTS
     
+    FFmpegMP4Writer *writer = [[FFmpegMP4Writer alloc] init];
+#ifdef USE_PTS
+    [writer beginWriteUseAACWithVideoFrameRate:25 width:1280 height:720 sampleRate:44100 bitRate:64 * 1000 error:NULL];
+#else
+    [writer beginWriteUnusedAudioWithVideoFrameRate:25 width:1280 height:720 error:NULL];
+#endif
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"暧昧" ofType:@"data"];
+    FILE *file = fopen([path UTF8String], "r");
+    TBMVideoFrameHeader head;
+    while (fread(&head, sizeof(head), 1, file) != 0) {
+        //NSLog(@"frame: %d %u", head.frameType, head.frameLength);
+        uint8_t *frame = malloc(head.frameLength + sizeof(uint64_t));
+        fread(frame, head.frameLength + sizeof(uint64_t), 1, file);
+        if(head.frameType == 10 || head.frameType == 9) {
+#ifdef USE_PTS
+            //*
+            int64_t pts = *((int64_t *)frame);
+            [writer writeFrame:head.frameType == 10 ? TBMFrameTypeVideoI : TBMFrameTypeVideoP
+                     frameData:frame
+                  frameDataLen:head.frameLength
+                         start:sizeof(uint64_t)
+                           pts:pts
+                         error:NULL];
+            //*/
+#else
+            /*
+             [writer writeFrame:head.frameType == 10 ? TBMFrameTypeVideoI : TBMFrameTypeVideoP
+             frameData:frame
+             frameDataLen:head.frameLength
+             start:sizeof(uint64_t)
+             error:NULL];
+             //*/
+#endif
+        } else {
+#ifdef USE_PTS
+            int64_t pts = *((int64_t *)frame);
+            [writer writeFrame:TBMFrameTypeAudio
+                     frameData:frame
+                  frameDataLen:head.frameLength
+                         start:sizeof(uint64_t)
+                           pts:pts
+                         error:NULL];
+#endif
+        }
+        free(frame);
+    }
+    
+    [writer endWrite:NULL];
+    [writer saveVideo:NULL];
+    
+    fclose(file);
 }
 
 - (void)didReceiveMemoryWarning {

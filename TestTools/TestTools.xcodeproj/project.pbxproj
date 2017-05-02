@@ -345,6 +345,7 @@
 				TargetAttributes = {
 					6976836F1DF1197A005811E5 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = X5B25JGZ5Y;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -529,6 +530,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				DEVELOPMENT_TEAM = X5B25JGZ5Y;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Libraries/FFmpeg/include";
 				INFOPLIST_FILE = TestTools/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -543,6 +545,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				DEVELOPMENT_TEAM = X5B25JGZ5Y;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Libraries/FFmpeg/include";
 				INFOPLIST_FILE = TestTools/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

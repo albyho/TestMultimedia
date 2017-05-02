@@ -61,8 +61,8 @@ typedef NS_ENUM(NSUInteger, FFmpegMP4WriterAudioType) {
              error:(NSError **)error;
 
 - (BOOL)endWrite:(NSError **)error;
-
 - (BOOL)saveVideo:(NSError **)error;
+
 
 
 @end
