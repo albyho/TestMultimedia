@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6913D7FF1EB81E7100D68FB2 /* FFmpegMP4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6913D7FE1EB81E7100D68FB2 /* FFmpegMP4Writer.m */; };
 		697683751DF1197A005811E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683741DF1197A005811E5 /* main.m */; };
 		697683781DF1197A005811E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 697683771DF1197A005811E5 /* AppDelegate.m */; };
 		6976837B1DF1197A005811E5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6976837A1DF1197A005811E5 /* ViewController.m */; };
@@ -43,9 +44,12 @@
 		697685A11DF11B51005811E5 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6976847F1DF11AB5005811E5 /* libx264.a */; };
 		697685A31DF11C94005811E5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 697685A21DF11C94005811E5 /* libiconv.tbd */; };
 		697685AF1DF1211A005811E5 /* booty music 男女双声道混音.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 697685AB1DF1211A005811E5 /* booty music 男女双声道混音.mp3 */; };
+		6978ED5A1EB82E77006CD109 /* 暧昧.data in Resources */ = {isa = PBXBuildFile; fileRef = 6978ED591EB82E77006CD109 /* 暧昧.data */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6913D7FD1EB81E7100D68FB2 /* FFmpegMP4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFmpegMP4Writer.h; sourceTree = "<group>"; };
+		6913D7FE1EB81E7100D68FB2 /* FFmpegMP4Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFmpegMP4Writer.m; sourceTree = "<group>"; };
 		697683701DF1197A005811E5 /* TestTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		697683741DF1197A005811E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		697683761DF1197A005811E5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 		6976847F1DF11AB5005811E5 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../Libraries/FFmpeg/lib/libx264.a; sourceTree = "<group>"; };
 		697685A21DF11C94005811E5 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		697685AB1DF1211A005811E5 /* booty music 男女双声道混音.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "booty music 男女双声道混音.mp3"; sourceTree = "<group>"; };
+		6978ED591EB82E77006CD109 /* 暧昧.data */ = {isa = PBXFileReference; lastKnownFileType = file; path = "暧昧.data"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +134,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6913D7FC1EB81E7100D68FB2 /* TBMMP4 */ = {
+			isa = PBXGroup;
+			children = (
+				6913D7FD1EB81E7100D68FB2 /* FFmpegMP4Writer.h */,
+				6913D7FE1EB81E7100D68FB2 /* FFmpegMP4Writer.m */,
+			);
+			path = TBMMP4;
+			sourceTree = "<group>";
+		};
 		697683671DF1197A005811E5 = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +173,7 @@
 				697683811DF1197A005811E5 /* LaunchScreen.storyboard */,
 				697683841DF1197A005811E5 /* Info.plist */,
 				697685AA1DF1211A005811E5 /* Resources */,
+				6913D7FC1EB81E7100D68FB2 /* TBMMP4 */,
 				697683BB1DF11AB5005811E5 /* Libraries */,
 				6976838A1DF119B6005811E5 /* TBMAudioConverter */,
 				697683911DF119B6005811E5 /* TBMAudioDecoder */,
@@ -292,6 +307,7 @@
 		697685AA1DF1211A005811E5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6978ED591EB82E77006CD109 /* 暧昧.data */,
 				697685AB1DF1211A005811E5 /* booty music 男女双声道混音.mp3 */,
 			);
 			name = Resources;
@@ -360,6 +376,7 @@
 				697683801DF1197A005811E5 /* Assets.xcassets in Resources */,
 				697685AF1DF1211A005811E5 /* booty music 男女双声道混音.mp3 in Resources */,
 				6976837E1DF1197A005811E5 /* Main.storyboard in Resources */,
+				6978ED5A1EB82E77006CD109 /* 暧昧.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +390,7 @@
 				697683A51DF119B6005811E5 /* AudioConverterAACEncoder.m in Sources */,
 				697683A21DF119B6005811E5 /* AudioConverterAACDecoder.m in Sources */,
 				6976837B1DF1197A005811E5 /* ViewController.m in Sources */,
+				6913D7FF1EB81E7100D68FB2 /* FFmpegMP4Writer.m in Sources */,
 				697683A71DF119B6005811E5 /* FFmpegAACEncoder.m in Sources */,
 				697683A01DF119B6005811E5 /* TBMADTS.c in Sources */,
 				697683781DF1197A005811E5 /* AppDelegate.m in Sources */,
