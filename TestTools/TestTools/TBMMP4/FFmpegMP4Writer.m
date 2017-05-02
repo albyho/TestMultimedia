@@ -81,7 +81,7 @@ const AVRational usTimeBase = {1, 1000000};
     if ( !self ) {
         return nil;
     }
-    [self reset];
+ 
     return self;
 }
 
@@ -126,8 +126,8 @@ const AVRational usTimeBase = {1, 1000000};
     _isWaitingForKeyFrame = YES;
     _videopts = 0;
     _audiopts = 0;
-    _vStartPTS = -1;
-    _aStartPTS = -1;
+    _vStartPTS = 0;
+    _aStartPTS = 0;
 }
 
 - (BOOL)beginWriteUnusedAudioWithVideoFrameRate:(int)videoFrameRate width:(int)width height:(int)height error:(NSError **)error {
@@ -239,9 +239,11 @@ const AVRational usTimeBase = {1, 1000000};
 {
     DLog(@"%@ %@ %@", __FUNCTION_FILE_LINE__, videoPath, error);
     if(!error) {
+        //*
         if([self.delegate respondsToSelector:@selector(saveVideo:)]) {
             [self.delegate saveVideo:@"已经成功将录像保存到相册."];
         }
+        //*/
     } else {
         [self error:800 message:@"保存录像文件失败,请再试."];
     }
@@ -285,7 +287,7 @@ const AVRational usTimeBase = {1, 1000000};
         
         void *pSpsPps=NULL;
         int spsPpsLen = 0;
-        if(![self extractSPSPPS:(const unsigned char*)frameData strLen:frameDataLen pOut:&pSpsPps outLen:&spsPpsLen]) {
+        if(![self findSpsPps:(const unsigned char*)frameData strLen:frameDataLen pOut:&pSpsPps outLen:&spsPpsLen]) {
             DLog(@"could not find sps or pps");
             return NO;
         }
@@ -388,7 +390,7 @@ const AVRational usTimeBase = {1, 1000000};
     pkt.data = (uint8_t*)(frameData + start);
     pkt.size = frameDataLen;
     
-    if(_vStartPTS < 0) {
+    if(_vStartPTS <= 0) {
         _vStartPTS = pts;
     }
     if(pts >= 0) {
@@ -441,7 +443,7 @@ const AVRational usTimeBase = {1, 1000000};
         pkt.data = (uint8_t *)data;
         pkt.size = frameDataLen - 7/*adts*/;
         
-        if(_aStartPTS < 0) {
+        if(_aStartPTS <= 0) {
             _aStartPTS = pts;
         }
         if(pts >= 0) {
@@ -625,7 +627,7 @@ static int get_nal_type(const void *p, int len ) {
 	}
 	//DLog(@"Index:%d %d %d %d\n\n",spsBeginIndex,spsEndIndex,ppsBeginIndex,ppsEndIndex);
 	if (spsBeginIndex < 0 || spsEndIndex < 0  || ppsBeginIndex < 0 || ppsEndIndex < 0) {
-		return - 1;
+		return false;
 	}
     
     *outLen = ppsEndIndex - spsBeginIndex + 1 + 4;
@@ -633,6 +635,75 @@ static int get_nal_type(const void *p, int len ) {
     memcpy(*pOut, pSrc + spsBeginIndex - 4, *outLen);
     
 	return true;
+}
+
+- (bool)findSpsPps:(const uint8_t *)pSrc
+            strLen:(int)srcLen
+              pOut:(void **)pOut
+            outLen:(int *)outLen
+{
+    int i;
+    int begPos = -1;
+    int endPos = -1;
+    int headlen = 0;
+    for (i=0; i + 5 < srcLen; i++)
+    {
+        if (pSrc[i]==0 && pSrc[i+1]==0 && pSrc[i+2]==1)
+        {
+            if ((pSrc[i+3]&0x1f)==7 || (pSrc[i+3]&0x1f)==8 )
+            {
+                begPos = i;
+                headlen = 3;
+                break;
+            }
+        }
+        else if (pSrc[i]==0 && pSrc[i+1]==0 && pSrc[i+2]==0 && pSrc[i+3]==1)
+        {
+            if ((pSrc[i+4]&0x1f)==7 || (pSrc[i+4]&0x1f)==8 )
+            {
+                begPos = i;
+                headlen = 4;
+                break;
+            }
+        }
+    }
+    
+    if (begPos<0)
+    {
+        return false;
+    }
+    
+    i+=headlen;
+    
+    for (; i+5<srcLen; i++)
+    {
+        if (pSrc[i]==0 && pSrc[i+1]==0 && pSrc[i+2]==1)
+        {
+            if ((pSrc[i+3]&0x1f)!=7 && (pSrc[i+3]&0x1f)!=8 )
+            {
+                endPos = i;
+                break;
+            }
+        }
+        else if (pSrc[i]==0 && pSrc[i+1]==0 && pSrc[i+2]==0 && pSrc[i+3]==1)
+        {
+            if ((pSrc[i+4]&0x1f)!=7 && (pSrc[i+4]&0x1f)!=8 )
+            {
+                endPos = i;
+                break;
+            }
+        }
+    }
+    
+    if (endPos == -1)
+    {
+        endPos = srcLen;
+    }
+    *outLen = endPos - begPos;
+    
+    *pOut = (uint8_t*)av_malloc(*outLen);
+    memcpy(*pOut, pSrc+begPos, *outLen);
+    return true;
 }
 
 /*
